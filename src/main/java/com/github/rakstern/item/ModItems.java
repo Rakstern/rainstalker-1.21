@@ -1,27 +1,37 @@
 package com.github.rakstern.item;
 
 import com.github.rakstern.RainStalker;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-
-import java.util.function.Function;
 
 public class ModItems {
 
     public static void initialize(){
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
+        Registry.register(Registries.ITEM_GROUP, CUSTOM_ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
+        ItemGroupEvents.modifyEntriesEvent(CUSTOM_ITEM_GROUP_KEY)
                 .register((itemGroup) -> {
                     itemGroup.add(ModItems.CONDENSED_DROPLET);
                     itemGroup.add(ModItems.CONDENSED_HAIL);
                 });
     }
+
+    public static final RegistryKey<ItemGroup> CUSTOM_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(RainStalker.MOD_ID, "item_group"));
+    public static final ItemGroup CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ModItems.CONDENSED_HAIL))
+            .displayName(Text.translatable("itemGroup.rainstalker"))
+            .build();
 
     public static final Item CONDENSED_DROPLET = register(new Item(new Item.Settings()),"condensed_droplet");
     public static final FoodComponent FROZEN_FOOD_COMPONENT = new FoodComponent.Builder()
