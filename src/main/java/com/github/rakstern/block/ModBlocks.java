@@ -23,13 +23,17 @@ public class ModBlocks {
     }
 
     public static final Block SODDEN_DIRT = register(
-            new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WET_GRASS)),
+            new Block(
+                    AbstractBlock.Settings.create()
+                            .strength(1f)
+                            .sounds(BlockSoundGroup.WET_GRASS)),
             "sodden_dirt",
             true
     );
     public static final Block SODDEN_OAK_LOG = register(
             new PillarBlock(
                     AbstractBlock.Settings.create()
+                            .strength(2f)
                             .sounds(BlockSoundGroup.WOOD)
             ), "sodden_oak_log", true
     );
