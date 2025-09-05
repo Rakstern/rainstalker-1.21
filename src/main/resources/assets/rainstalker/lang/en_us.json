@@ -1,6 +1,7 @@
 {
   "itemGroup.rainstalker": "RainStalker",
   "block.rainstalker.sodden_dirt": "Sodden Dirt",
+  "block.rainstalker.sodden_oak_log": "Sodden Oak Log",
   "item.rainstalker.condensed_droplet": "Condensed Droplet",
   "item.rainstalker.condensed_hail": "Condensed Hail"
 }

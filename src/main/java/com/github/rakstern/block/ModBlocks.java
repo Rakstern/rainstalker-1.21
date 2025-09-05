@@ -5,6 +5,7 @@ import com.github.rakstern.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -17,6 +18,7 @@ public class ModBlocks {
     public static void initialize(){
         ItemGroupEvents.modifyEntriesEvent(ModItems.CUSTOM_ITEM_GROUP_KEY).register((itemGroup) -> {
             itemGroup.add(ModBlocks.SODDEN_DIRT.asItem());
+            itemGroup.add(ModBlocks.SODDEN_OAK_LOG.asItem());
         });
     }
 
@@ -24,6 +26,12 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WET_GRASS)),
             "sodden_dirt",
             true
+    );
+    public static final Block SODDEN_OAK_LOG = register(
+            new PillarBlock(
+                    AbstractBlock.Settings.create()
+                            .sounds(BlockSoundGroup.WOOD)
+            ), "sodden_oak_log", true
     );
 
     public static Block register(Block block, String name, boolean shouldRegisterItem) {
