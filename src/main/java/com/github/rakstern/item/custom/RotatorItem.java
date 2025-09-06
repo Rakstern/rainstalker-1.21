@@ -2,8 +2,11 @@ package com.github.rakstern.item.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -20,9 +23,14 @@ public class RotatorItem extends Item {
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
         BlockState state = world.getBlockState(pos);
+        PlayerEntity player = context.getPlayer();
 
         if(!world.isClient()){
-            BlockState rotated = state.rotate(BlockRotation.CLOCKWISE_90);
+            BlockRotation rotation = player.isSneaking()
+                    ? BlockRotation.COUNTERCLOCKWISE_90
+                    : BlockRotation.CLOCKWISE_90;
+
+            BlockState rotated = state.rotate(rotation);
             if(rotated != state){
                 world.setBlockState(pos, rotated);
             }
