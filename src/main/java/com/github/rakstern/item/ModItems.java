@@ -1,6 +1,7 @@
 package com.github.rakstern.item;
 
 import com.github.rakstern.RainStalker;
+import com.github.rakstern.item.custom.RotatorItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.FoodComponent;
@@ -24,6 +25,7 @@ public class ModItems {
                 .register((itemGroup) -> {
                     itemGroup.add(ModItems.CONDENSED_DROPLET);
                     itemGroup.add(ModItems.CONDENSED_HAIL);
+                    itemGroup.add(ModItems.ROTATOR_TOOL);
                 });
     }
 
@@ -33,13 +35,16 @@ public class ModItems {
             .displayName(Text.translatable("itemGroup.rainstalker"))
             .build();
 
-    public static final Item CONDENSED_DROPLET = register(new Item(new Item.Settings()),"condensed_droplet");
     public static final FoodComponent FROZEN_FOOD_COMPONENT = new FoodComponent.Builder()
             .alwaysEdible()
             .snack()
             .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 3 * 20, 1), 1.0f)
             .build();
+
+    public static final Item CONDENSED_DROPLET = register(new Item(new Item.Settings()),"condensed_droplet");
     public static final Item CONDENSED_HAIL = register(new Item(new Item.Settings().food(FROZEN_FOOD_COMPONENT)), "condensed_hail");
+
+    public static final Item ROTATOR_TOOL = register(new RotatorItem(new Item.Settings()), "rotator");
 
     public static Item register(Item item, String id) {
         // Create the identifier for the item.
