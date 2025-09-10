@@ -3,9 +3,16 @@
 
   "block.rainstalker.sodden_dirt": "Sodden Dirt",
   "block.rainstalker.sodden_oak_log": "Sodden Oak Log",
+  "block.rainstalker.mire_dirt": "Mire Dirt",
 
   "item.rainstalker.condensed_droplet": "Condensed Droplet",
   "item.rainstalker.condensed_hail": "Condensed Hail",
 
-  "item.rainstalker.rotator": "Rotator"
+  "item.rainstalker.rotator": "Rotator",
+  "item.rainstalker.stalkers_hook": "Stalker's Hook",
+
+  "tooltip.rainstalker.magic_block.tooltip": "Touch and be slowed.",
+  "tooltip.rainstalker.stalkers_hook.details": "Super details! Eventually this Fishing Rod will allow you to fish from one very specific entity...",
+  "tooltip.rainstalker.stalkers_hook.hold_shift": "Hold SHIFT for more details!",
+  "tooltip.rainstalker.condensed_hail.tooltip": "Not tasty"
 }

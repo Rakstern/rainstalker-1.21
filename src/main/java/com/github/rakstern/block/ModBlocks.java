@@ -1,6 +1,7 @@
 package com.github.rakstern.block;
 
 import com.github.rakstern.RainStalker;
+import com.github.rakstern.block.custom.MagicBlock;
 import com.github.rakstern.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
@@ -19,6 +20,7 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ModItems.CUSTOM_ITEM_GROUP_KEY).register((itemGroup) -> {
             itemGroup.add(ModBlocks.SODDEN_DIRT.asItem());
             itemGroup.add(ModBlocks.SODDEN_OAK_LOG.asItem());
+            itemGroup.add(ModBlocks.MIRE_DIRT.asItem());
         });
     }
 
@@ -36,6 +38,13 @@ public class ModBlocks {
                             .strength(2f)
                             .sounds(BlockSoundGroup.WOOD)
             ), "sodden_oak_log", true
+    );
+    public static final Block MIRE_DIRT = register(
+            new MagicBlock(
+                    AbstractBlock.Settings.create()
+                            .strength(2f)
+                            .sounds(BlockSoundGroup.MUD)
+            ), "mire_dirt", true
     );
 
     public static Block register(Block block, String name, boolean shouldRegisterItem) {
