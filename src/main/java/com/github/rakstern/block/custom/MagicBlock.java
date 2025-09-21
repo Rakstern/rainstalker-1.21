@@ -2,7 +2,6 @@ package com.github.rakstern.block.custom;
 
 import com.github.rakstern.item.ModItems;
 import com.github.rakstern.util.ModTags;
-import net.fabricmc.loader.impl.util.log.Log;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;

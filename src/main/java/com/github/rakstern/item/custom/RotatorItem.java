@@ -29,7 +29,7 @@ public class RotatorItem extends Item {
         PlayerEntity player = context.getPlayer();
 
         if(!world.isClient()){
-            BlockRotation rotation = player.isSneaking()
+            BlockRotation rotation = (player != null && player.isSneaking())
                     ? BlockRotation.COUNTERCLOCKWISE_90
                     : BlockRotation.CLOCKWISE_90;
 

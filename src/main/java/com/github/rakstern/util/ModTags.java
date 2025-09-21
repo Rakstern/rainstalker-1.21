@@ -3,7 +3,6 @@ package com.github.rakstern.util;
 import com.github.rakstern.RainStalker;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
