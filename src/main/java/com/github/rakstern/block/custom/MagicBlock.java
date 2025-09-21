@@ -1,12 +1,15 @@
 package com.github.rakstern.block.custom;
 
+import com.github.rakstern.item.ModItems;
+import com.github.rakstern.util.ModTags;
+import net.fabricmc.loader.impl.util.log.Log;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
@@ -29,8 +32,17 @@ public class MagicBlock extends Block {
                     1);
             livingEntity.addStatusEffect(instance);
         }
+        if(entity instanceof ItemEntity itemEntity){
+            if(isValidItem(itemEntity.getStack())){
+                itemEntity.setStack(new ItemStack(ModItems.CONDENSED_HAIL, itemEntity.getStack().getCount()));
+            }
+        }
 
         super.onSteppedOn(world, pos, state, entity);
+    }
+
+    private boolean isValidItem(ItemStack stack) {
+        return stack.isIn(ModTags.Items.RAINSTALKER_DROP_ITEMS);
     }
 
     @Override
