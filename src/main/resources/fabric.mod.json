@@ -20,8 +20,11 @@
 		],
 		"client": [
 			"com.github.rakstern.RainStalkerClient"
-		]
-	},
+		],
+        "fabric-datagen": [
+            "com.github.rakstern.RainStalkerDataGenerator"
+        ]
+    },
 	"mixins": [
 		"rainstalker.mixins.json",
 		{
