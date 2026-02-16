@@ -28,10 +28,30 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         addDrop(ModBlocks.SODDEN_DIRT);
         addDrop(ModBlocks.MIRE_DIRT);
-        addDrop(ModBlocks.SODDEN_OAK_LOG);
+
 
         //Example, not intended, could be unbalanced
         //addDrop(ModBlocks.SODDEN_DIRT, multipleOreDrops(ModBlocks.SODDEN_DIRT, ModItems.CONDENSED_DROPLET, 3, 5));
+
+        addDrop(ModBlocks.SODDEN_OAK_LOG);
+        addDrop(ModBlocks.STRIPPED_SODDEN_OAK_LOG);
+        addDrop(ModBlocks.SODDEN_OAK_WOOD);
+        addDrop(ModBlocks.STRIPPED_SODDEN_OAK_WOOD);
+        leavesDrops(ModBlocks.SODDEN_OAK_LEAVES, ModBlocks.SODDEN_OAK_SAPLING, SAPLING_DROP_CHANCE);
+        addDrop(ModBlocks.SODDEN_OAK_SAPLING);
+        addDrop(ModBlocks.SODDEN_OAK_PLANKS);
+        addDrop(ModBlocks.SODDEN_OAK_SLAB);
+        addDrop(ModBlocks.SODDEN_OAK_STAIRS);
+        addDrop(ModBlocks.SODDEN_OAK_FENCE);
+        addDrop(ModBlocks.SODDEN_OAK_FENCE_GATE);
+        addDrop(ModBlocks.SODDEN_OAK_DOOR);
+        addDrop(ModBlocks.SODDEN_OAK_TRAPDOOR);
+        addDrop(ModBlocks.SODDEN_OAK_BUTTON);
+        addDrop(ModBlocks.SODDEN_OAK_PRESSURE_PLATE);
+        addDrop(ModBlocks.SODDEN_OAK_SIGN, ModItems.SODDEN_OAK_SIGN);
+        addDrop(ModBlocks.SODDEN_OAK_WALL_SIGN, ModItems.SODDEN_OAK_SIGN);
+        addDrop(ModBlocks.SODDEN_OAK_HANGING_SIGN, ModItems.SODDEN_OAK_HANGING_SIGN);
+        addDrop(ModBlocks.SODDEN_OAK_WALL_HANGING_SIGN, ModItems.SODDEN_OAK_HANGING_SIGN);
     }
 
     //If I add a block that drops items that aren't itself, I'll use this method below

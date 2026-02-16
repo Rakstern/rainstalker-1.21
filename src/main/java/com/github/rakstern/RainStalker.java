@@ -4,6 +4,7 @@ import com.github.rakstern.block.ModBlocks;
 import com.github.rakstern.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,11 @@ public class RainStalker implements ModInitializer {
 		// Proceed with mild caution.
         ModItems.initialize();
         ModBlocks.initialize();
+        ModBoats.initialize();
 		LOGGER.info("Hello Fabric world!");
 	}
+
+    public static Identifier id(String path){
+        return Identifier.of(MOD_ID, path);
+    }
 }

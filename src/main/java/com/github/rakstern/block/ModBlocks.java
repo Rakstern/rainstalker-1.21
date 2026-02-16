@@ -3,6 +3,13 @@ package com.github.rakstern.block;
 import com.github.rakstern.RainStalker;
 import com.github.rakstern.block.custom.MagicBlock;
 import com.github.rakstern.item.ModItems;
+import com.github.rakstern.list.BlockSetTypeList;
+import com.github.rakstern.list.WoodTypeList;
+import com.terraformersmc.terraform.sign.api.TerraformHangingSign;
+import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
@@ -48,7 +55,7 @@ public class ModBlocks {
     );
 
     public static final Block SODDEN_OAK_WOOD = register(
-            new Block(
+            new PillarBlock(
                     AbstractBlock.Settings.create()
                             .strength(2f)
                             .sounds(BlockSoundGroup.WOOD)
@@ -59,7 +66,7 @@ public class ModBlocks {
     );
 
     public static final Block STRIPPED_SODDEN_OAK_WOOD = register(
-            new Block(
+            new PillarBlock(
                     AbstractBlock.Settings.create()
                             .strength(2f)
                             .sounds(BlockSoundGroup.WOOD)
@@ -125,7 +132,7 @@ public class ModBlocks {
 
     public static final DoorBlock SODDEN_OAK_DOOR = register(
             new DoorBlock(
-                    null,
+                    BlockSetTypeList.SODDEN_OAK,
                     AbstractBlock.Settings.create()
                             .instrument(NoteBlockInstrument.BASS)
                             .strength(3.0f)
@@ -151,7 +158,7 @@ public class ModBlocks {
     );
 
     public static final FenceGateBlock SODDEN_OAK_FENCE_GATE = register(
-            new FenceGateBlock(null,
+            new FenceGateBlock(WoodTypeList.SODDEN_OAK,
                     AbstractBlock.Settings.create()
                             .solid()
                             .instrument(NoteBlockInstrument.BASS)
@@ -161,7 +168,7 @@ public class ModBlocks {
             ),
             "sodden_oak_fence_gate",
             true
-    );
+    ); //TO-DO: Change WoodType.Oak
 
     public static final Block SODDEN_OAK_STAIRS = register(
             new StairsBlock(
@@ -183,7 +190,7 @@ public class ModBlocks {
     );
 
     public static final PressurePlateBlock SODDEN_OAK_PRESSURE_PLATE = register(
-            new PressurePlateBlock(null, AbstractBlock.Settings.create()
+            new PressurePlateBlock(BlockSetTypeList.SODDEN_OAK, AbstractBlock.Settings.create()
                     .solid()
                     .instrument(NoteBlockInstrument.BASS)
                     .noCollision()
@@ -196,13 +203,14 @@ public class ModBlocks {
     );
 
     public static final Block SODDEN_OAK_BUTTON = register(
-            Blocks.createWoodenButtonBlock(null),
+            new ButtonBlock(BlockSetTypeList.SODDEN_OAK, 1, AbstractBlock.Settings.create()
+                    .burnable()),
             "sodden_oak_button",
             true
     );
 
     public static final TrapdoorBlock SODDEN_OAK_TRAPDOOR = register(
-            new TrapdoorBlock(null, AbstractBlock.Settings.create()
+            new TrapdoorBlock(BlockSetTypeList.SODDEN_OAK, AbstractBlock.Settings.create()
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(3f)
                     .nonOpaque()
@@ -210,6 +218,62 @@ public class ModBlocks {
                     .burnable()
             ),
             "sodden_oak_trapdoor",
+            true
+    );
+
+    private static final Identifier SODDEN_OAK_SIGN_TEXTURE = RainStalker.id("entity/signs/sodden_oak");
+    private static final Identifier SODDEN_OAK_HANGING_SIGN_TEXTURE = RainStalker.id("entity/signs/hanging/sodden_oak");
+    private static final Identifier SODDEN_OAK_HANGING_SIGN_GUI_TEXTURE = RainStalker.id("textures/gui/hanging_signs/sodden_oak");
+
+    public static final TerraformSignBlock SODDEN_OAK_SIGN = register(
+            new TerraformSignBlock(SODDEN_OAK_SIGN_TEXTURE,
+                    AbstractBlock.Settings.create()
+                            .solid()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .noCollision()
+                            .strength(1f)
+                            .burnable()
+            ),
+            "sodden_oak_sign",
+            true
+    );
+
+    public static final TerraformWallSignBlock SODDEN_OAK_WALL_SIGN = register(
+            new TerraformWallSignBlock(SODDEN_OAK_SIGN_TEXTURE,
+                    AbstractBlock.Settings.create()
+                            .solid()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .noCollision()
+                            .strength(1f)
+                            .burnable()
+            ),
+            "sodden_oak_wall_sign",
+            false
+    );
+
+    public static final TerraformHangingSignBlock SODDEN_OAK_HANGING_SIGN = register(
+            new TerraformHangingSignBlock(SODDEN_OAK_HANGING_SIGN_TEXTURE, SODDEN_OAK_HANGING_SIGN_GUI_TEXTURE,
+                    AbstractBlock.Settings.create()
+                            .solid()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .noCollision()
+                            .strength(1f)
+                            .burnable()
+            ),
+            "sodden_oak_hanging_sign",
+            true
+    );
+
+    public static final TerraformWallHangingSignBlock SODDEN_OAK_WALL_HANGING_SIGN = register(
+            new TerraformWallHangingSignBlock(SODDEN_OAK_HANGING_SIGN_TEXTURE, SODDEN_OAK_HANGING_SIGN_GUI_TEXTURE,
+                    AbstractBlock.Settings.create()
+                            .solid()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .noCollision()
+                            .strength(1f)
+                            .burnable()
+            ),
+            "sodden_oak_wall_hanging_sign",
             true
     );
 

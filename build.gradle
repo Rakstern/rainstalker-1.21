@@ -17,6 +17,13 @@ repositories {
     }
 }
 
+
+fabricApi {
+    configureDataGeneration {
+        client = true
+    }
+}
+
 loom {
 	splitEnvironmentSourceSets()
 
@@ -94,9 +101,3 @@ publishing {
 		// retrieving dependencies.
 	}
 }
-/*
-fabricApi {
-    configureDataGeneration {
-        client = true
-    }
-}*/ //Apparently removed to avoid conflicting with the run datagen inherit client bit

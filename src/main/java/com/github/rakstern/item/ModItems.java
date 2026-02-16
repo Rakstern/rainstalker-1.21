@@ -1,8 +1,12 @@
 package com.github.rakstern.item;
 
+import com.github.rakstern.ModBoats;
 import com.github.rakstern.RainStalker;
+import com.github.rakstern.block.ModBlocks;
 import com.github.rakstern.item.custom.AdvancedFishingRodItem;
 import com.github.rakstern.item.custom.RotatorItem;
+import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
+import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.FoodComponent;
@@ -55,7 +59,15 @@ public class ModItems {
     public static final Item ROTATOR_TOOL = register(new RotatorItem(new Item.Settings()), "rotator");
     public static final Item STALKERS_HOOK = register(new AdvancedFishingRodItem(new Item.Settings().maxDamage(250)), "stalkers_hook");
 
-    public static Item register(Item item, String id) {
+    public static final SignItem SODDEN_OAK_SIGN = register(new SignItem(new Item.Settings().maxCount(16), ModBlocks.SODDEN_OAK_SIGN, ModBlocks.SODDEN_OAK_WALL_SIGN), "sodden_oak_sign");
+    public static final HangingSignItem SODDEN_OAK_HANGING_SIGN = register(new HangingSignItem(ModBlocks.SODDEN_OAK_HANGING_SIGN, ModBlocks.SODDEN_OAK_WALL_HANGING_SIGN, new Item.Settings().maxCount(16)), "sodden_oak_hanging_sign");
+
+    public static final Item SODDEN_OAK_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.SODDEN_OAK_BOAT_ID, ModBoats.SODDEN_OAK_BOAT_KEY, false);
+
+    public static final Item SODDEN_OAK_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.SODDEN_OAK_CHEST_BOAT_ID, ModBoats.SODDEN_OAK_BOAT_KEY, true);
+
+
+    public static <T extends Item> T register(T item, String id) {
         // Create the identifier for the item.
         Identifier itemID = Identifier.of(RainStalker.MOD_ID, id);
 
