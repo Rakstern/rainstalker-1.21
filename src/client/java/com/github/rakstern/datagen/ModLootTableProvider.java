@@ -44,7 +44,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.SODDEN_OAK_STAIRS);
         addDrop(ModBlocks.SODDEN_OAK_FENCE);
         addDrop(ModBlocks.SODDEN_OAK_FENCE_GATE);
-        addDrop(ModBlocks.SODDEN_OAK_DOOR);
+        doorDrops(ModBlocks.SODDEN_OAK_DOOR);
         addDrop(ModBlocks.SODDEN_OAK_TRAPDOOR);
         addDrop(ModBlocks.SODDEN_OAK_BUTTON);
         addDrop(ModBlocks.SODDEN_OAK_PRESSURE_PLATE);

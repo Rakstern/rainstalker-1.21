@@ -5,12 +5,12 @@ import com.github.rakstern.block.custom.MagicBlock;
 import com.github.rakstern.item.ModItems;
 import com.github.rakstern.list.BlockSetTypeList;
 import com.github.rakstern.list.WoodTypeList;
-import com.terraformersmc.terraform.sign.api.TerraformHangingSign;
 import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -29,6 +29,9 @@ public class ModBlocks {
             itemGroup.add(ModBlocks.SODDEN_OAK_LOG.asItem());
             itemGroup.add(ModBlocks.MIRE_DIRT.asItem());
         });
+
+        StrippableBlockRegistry.register(ModBlocks.SODDEN_OAK_LOG, ModBlocks.STRIPPED_SODDEN_OAK_LOG);
+        StrippableBlockRegistry.register(ModBlocks.SODDEN_OAK_WOOD, ModBlocks.STRIPPED_SODDEN_OAK_WOOD);
     }
 
     public static final Block SODDEN_DIRT = register(
@@ -40,23 +43,21 @@ public class ModBlocks {
             true
     );
     public static final Block SODDEN_OAK_LOG = register(
-            new PillarBlock(
-                    AbstractBlock.Settings.create()
-                            .strength(2f)
-                            .sounds(BlockSoundGroup.WOOD)
-            ), "sodden_oak_log", true
+            Blocks.createLogBlock(MapColor.BROWN, MapColor.DIRT_BROWN),
+            "sodden_oak_log",
+            true
     );
 
     public static final Block STRIPPED_SODDEN_OAK_LOG = register(
-            new PillarBlock(AbstractBlock.Settings.create()
-                    .strength(2f)
-                    .sounds(BlockSoundGroup.WOOD)
-            ), "stripped_sodden_oak_log", true
+            Blocks.createLogBlock(MapColor.BROWN, MapColor.DIRT_BROWN),
+            "stripped_sodden_oak_log",
+            true
     );
 
     public static final Block SODDEN_OAK_WOOD = register(
             new PillarBlock(
                     AbstractBlock.Settings.create()
+                            .instrument(NoteBlockInstrument.BASS)
                             .strength(2f)
                             .sounds(BlockSoundGroup.WOOD)
                             .burnable()
@@ -68,6 +69,7 @@ public class ModBlocks {
     public static final Block STRIPPED_SODDEN_OAK_WOOD = register(
             new PillarBlock(
                     AbstractBlock.Settings.create()
+                            .instrument(NoteBlockInstrument.BASS)
                             .strength(2f)
                             .sounds(BlockSoundGroup.WOOD)
                             .burnable()
@@ -86,10 +88,7 @@ public class ModBlocks {
 
     public static final Block SODDEN_OAK_PLANKS = register(
             new Block(
-                    AbstractBlock.Settings.create()
-                            .strength(2f)
-                            .sounds(BlockSoundGroup.WOOD)
-                            .burnable()
+                    AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)
             ),
             "sodden_oak_planks",
             true
@@ -124,6 +123,7 @@ public class ModBlocks {
                             .suffocates(Blocks::never)
                             .blockVision(Blocks::never)
                             .burnable()
+                            .noCollision()
                             .solidBlock(Blocks::never)
             ),
             "sodden_oak_sapling",

@@ -24,7 +24,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(TagList.Items.SODDEN_OAK_LOGS)
                 .add(ModBlocks.SODDEN_OAK_LOG.asItem())
-                .add(ModBlocks.STRIPPED_SODDEN_OAK_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_SODDEN_OAK_LOG.asItem())
                 .add(ModBlocks.SODDEN_OAK_WOOD.asItem())
                 .add(ModBlocks.STRIPPED_SODDEN_OAK_WOOD.asItem());
 
@@ -36,6 +36,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(ItemTags.SAPLINGS)
                 .add(ModBlocks.SODDEN_OAK_SAPLING.asItem());
+
+        getOrCreateTagBuilder(ItemTags.PLANKS)
+                .add(ModBlocks.SODDEN_OAK_PLANKS.asItem());
 
         getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
                 .add(ModBlocks.SODDEN_OAK_BUTTON.asItem());

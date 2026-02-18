@@ -39,6 +39,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.CONDENSED_DROPLET), conditionsFromItem(ModItems.CONDENSED_DROPLET))
                 .offerTo(recipeExporter);
 
+        offerBarkBlockRecipe(recipeExporter, ModBlocks.SODDEN_OAK_WOOD, ModBlocks.SODDEN_OAK_LOG);
+        offerBarkBlockRecipe(recipeExporter, ModBlocks.STRIPPED_SODDEN_OAK_WOOD, ModBlocks.STRIPPED_SODDEN_OAK_LOG);
+
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SODDEN_OAK_PLANKS, 4)
                 .input(Ingredient.fromTag(TagList.Items.SODDEN_OAK_LOGS))
                 .criterion(hasTag(TagList.Items.SODDEN_OAK_LOGS), conditionsFromTag(TagList.Items.SODDEN_OAK_LOGS))
@@ -113,7 +116,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(recipeExporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModItems.SODDEN_OAK_HANGING_SIGN, 6)
-                .input('S', ModBlocks.SODDEN_OAK_PLANKS)
+                .input('S', ModBlocks.STRIPPED_SODDEN_OAK_LOG)
                 .input('C', ConventionalItemTags.CHAINS)
                 .pattern("C C")
                 .pattern("SSS")

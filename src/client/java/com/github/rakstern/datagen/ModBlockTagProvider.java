@@ -38,6 +38,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.SAPLINGS)
                 .add(ModBlocks.SODDEN_OAK_SAPLING);
 
+        getOrCreateTagBuilder(BlockTags.PLANKS)
+                .add(ModBlocks.SODDEN_OAK_PLANKS);
+
         getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
                 .add(ModBlocks.SODDEN_OAK_BUTTON);
 
