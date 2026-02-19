@@ -47,11 +47,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasTag(TagList.Items.SODDEN_OAK_LOGS), conditionsFromTag(TagList.Items.SODDEN_OAK_LOGS))
                 .offerTo(recipeExporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SODDEN_OAK_SLAB, 6)
-                .input('S', ModBlocks.SODDEN_OAK_PLANKS)
-                .pattern("SSS")
-                .criterion(FabricRecipeProvider.hasItem(ModBlocks.SODDEN_OAK_PLANKS), FabricRecipeProvider.conditionsFromItem(ModBlocks.SODDEN_OAK_PLANKS))
-                .offerTo(recipeExporter);
+        offerSlabRecipe(recipeExporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SODDEN_OAK_SLAB, ModBlocks.SODDEN_OAK_PLANKS);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SODDEN_OAK_STAIRS, 4)
                 .input('S', ModBlocks.SODDEN_OAK_PLANKS)
@@ -79,6 +75,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasTag(ConventionalItemTags.WOODEN_RODS), FabricRecipeProvider.conditionsFromTag(ConventionalItemTags.WOODEN_RODS))
                 .offerTo(recipeExporter);
 
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SODDEN_OAK_DOOR, 3)
                 .input('S', ModBlocks.SODDEN_OAK_PLANKS)
                 .pattern("SS")
@@ -99,11 +96,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.SODDEN_OAK_PLANKS), FabricRecipeProvider.conditionsFromItem(ModBlocks.SODDEN_OAK_PLANKS))
                 .offerTo(recipeExporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.SODDEN_OAK_PRESSURE_PLATE)
-                .input('S', ModBlocks.SODDEN_OAK_PLANKS)
-                .pattern("SS")
-                .criterion(FabricRecipeProvider.hasItem(ModBlocks.SODDEN_OAK_PLANKS), FabricRecipeProvider.conditionsFromItem(ModBlocks.SODDEN_OAK_PLANKS))
-                .offerTo(recipeExporter);
+        offerPressurePlateRecipe(recipeExporter, ModBlocks.SODDEN_OAK_PRESSURE_PLATE, ModBlocks.SODDEN_OAK_PLANKS);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModItems.SODDEN_OAK_SIGN, 3)
                 .input('S', ModBlocks.SODDEN_OAK_PLANKS)

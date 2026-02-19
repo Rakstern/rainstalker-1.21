@@ -1,0 +1,8 @@
+{
+  "rotator_tool_rotate": {
+    "subtitle": "sounds.rainstalker.rotator_tool_rotate",
+    "sounds": [
+      "rainstalker:tool/rotator_tool_rotate"
+      ]
+  }
+}

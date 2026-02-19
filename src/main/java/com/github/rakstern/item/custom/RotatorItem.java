@@ -1,12 +1,15 @@
 package com.github.rakstern.item.custom;
 
 
+import com.github.rakstern.component.ModDataComponentTypes;
+import com.github.rakstern.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRotation;
@@ -36,6 +39,8 @@ public class RotatorItem extends Item {
             BlockState rotated = state.rotate(rotation);
             if(rotated != state){
                 world.setBlockState(pos, rotated);
+                world.playSound(null, context.getBlockPos(), ModSounds.ROTATOR_TOOL_ROTATE, SoundCategory.BLOCKS, 1f, 0.9f + world.random.nextFloat() * 0.2F);
+                context.getStack().set(ModDataComponentTypes.COORDINATES, context.getBlockPos());
             }
         }
 
@@ -46,7 +51,9 @@ public class RotatorItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 
-
+        if(stack.get(ModDataComponentTypes.COORDINATES) != null){
+            tooltip.add(Text.literal("Last block changed at " + stack.get(ModDataComponentTypes.COORDINATES)));
+        }
         super.appendTooltip(stack, context, tooltip, type);
     }
 }

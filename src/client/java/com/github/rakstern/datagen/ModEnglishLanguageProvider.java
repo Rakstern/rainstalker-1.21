@@ -29,7 +29,23 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
 
+        translationBuilder.add("itemGroup.rainstalker", "RainStalker");
 
+        translationBuilder.add(ModBlocks.SODDEN_DIRT, "Sodden Dirt");
+        translationBuilder.add(ModBlocks.MIRE_DIRT, "Mire Dirt");
+
+        translationBuilder.add(ModItems.CONDENSED_DROPLET, "Condensed Droplet");
+        translationBuilder.add("tooltip.rainstalker.condensed_hail.tooltip", "Not tasty.");
+        translationBuilder.add(ModItems.CONDENSED_HAIL, "Condensed Hail");
+
+        //Tools
+        translationBuilder.add(ModItems.STALKERS_HOOK, "Stalker's Hook");
+        translationBuilder.add("tooltip.rainstalker.stalkers_hook.hold_shift", "Hold SHIFT for more details!");
+        translationBuilder.add("tooltip.rainstalker.stalkers_hook.details", "Super details! Eventually this Fishing Rod will allow you to fish from one very specific entity...");
+        translationBuilder.add(ModItems.ROTATOR_TOOL, "Rotator Tool");
+        translationBuilder.add("sounds.rainstalker.rotator_tool_rotate", "Block rotated");
+
+        //Sodden Oak Wood Set
         translationBuilder.add(ModBlocks.SODDEN_OAK_LOG, "Sodden Oak Log");
         translationBuilder.add(ModBlocks.STRIPPED_SODDEN_OAK_LOG, "Stripped Sodden Oak Log");
         translationBuilder.add(ModBlocks.SODDEN_OAK_WOOD, "Sodden Oak Wood");
@@ -49,7 +65,6 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.SODDEN_OAK_HANGING_SIGN, "Sodden Oak Hanging Sign");
         translationBuilder.add(ModItems.SODDEN_OAK_BOAT, "Sodden Oak Boat");
         translationBuilder.add(ModItems.SODDEN_OAK_CHEST_BOAT, "Sodden Oak Chest Boat");
-
         translationBuilder.add(TagList.Items.SODDEN_OAK_LOGS, "Sodden Oak Logs");
     }
 }

@@ -32,6 +32,11 @@ public class ModItems {
                     itemGroup.add(ModItems.CONDENSED_HAIL);
                     itemGroup.add(ModItems.ROTATOR_TOOL);
                     itemGroup.add(ModItems.STALKERS_HOOK);
+
+                    itemGroup.add(ModItems.SODDEN_OAK_SIGN);
+                    itemGroup.add(ModItems.SODDEN_OAK_HANGING_SIGN);
+                    itemGroup.add(ModItems.SODDEN_OAK_BOAT);
+                    itemGroup.add(ModItems.SODDEN_OAK_CHEST_BOAT);
                 });
     }
 

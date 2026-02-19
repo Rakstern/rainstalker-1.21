@@ -21,13 +21,16 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModBlocks {
+
+    public static final List<Block> RAINSTALKER_BLOCKS = new ArrayList<>();
 
     public static void initialize(){
         ItemGroupEvents.modifyEntriesEvent(ModItems.CUSTOM_ITEM_GROUP_KEY).register((itemGroup) -> {
-            itemGroup.add(ModBlocks.SODDEN_DIRT.asItem());
-            itemGroup.add(ModBlocks.SODDEN_OAK_LOG.asItem());
-            itemGroup.add(ModBlocks.MIRE_DIRT.asItem());
+            RAINSTALKER_BLOCKS.forEach(itemGroup::add);
         });
 
         StrippableBlockRegistry.register(ModBlocks.SODDEN_OAK_LOG, ModBlocks.STRIPPED_SODDEN_OAK_LOG);
@@ -203,8 +206,7 @@ public class ModBlocks {
     );
 
     public static final Block SODDEN_OAK_BUTTON = register(
-            new ButtonBlock(BlockSetTypeList.SODDEN_OAK, 1, AbstractBlock.Settings.create()
-                    .burnable()),
+            Blocks.createWoodenButtonBlock(BlockSetTypeList.SODDEN_OAK),
             "sodden_oak_button",
             true
     );
@@ -274,7 +276,7 @@ public class ModBlocks {
                             .burnable()
             ),
             "sodden_oak_wall_hanging_sign",
-            true
+            false
     );
 
     public static <T extends Block> T register(T block, String name, boolean shouldRegisterItem) {
@@ -286,6 +288,8 @@ public class ModBlocks {
         if (shouldRegisterItem) {
             BlockItem blockItem = new BlockItem(block, new Item.Settings());
             Registry.register(Registries.ITEM, id, blockItem);
+
+            RAINSTALKER_BLOCKS.add(block);
         }
 
         return Registry.register(Registries.BLOCK, id, block);
