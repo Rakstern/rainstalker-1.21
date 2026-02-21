@@ -28,6 +28,8 @@ public class RainStalker implements ModInitializer {
         ModBoats.initialize();
         ModSounds.initialize();
         ModDataComponentTypes.registerDataComponentTypes();
+
+
 		LOGGER.info("Hello Fabric world!");
 	}
 

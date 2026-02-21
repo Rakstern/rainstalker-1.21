@@ -69,34 +69,35 @@ public class ModModelProvider extends FabricModelProvider {
 
     private void generateFishingRodModels(ItemModelGenerator itemModelGenerator){
         Identifier modelId = ModelIds.getItemModelId(ModItems.STALKERS_HOOK);
-
+        Identifier castModelId = modelId.withSuffixedPath("_cast");
+        //Main Rod
         JsonObject root = new JsonObject();
         root.addProperty("parent", "minecraft:item/handheld_rod");
-
         JsonObject textures = new JsonObject();
         textures.addProperty("layer0", "rainstalker:item/stalkers_hook");
         root.add("textures", textures);
 
-        // 4. Create and add the "overrides" array
         JsonArray overrides = new JsonArray();
-
-        // 5. Create the single override object
         JsonObject override = new JsonObject();
 
-        // 6. Create and add the "predicate" object
         JsonObject predicate = new JsonObject();
         predicate.addProperty("cast", 1);
         override.add("predicate", predicate);
 
-        // 7. Add the model for this override
-        override.addProperty("model", "minecraft:item/fishing_rod_cast");
+        override.addProperty("model", castModelId.toString());
 
-        // 8. Add the override to the overrides array
         overrides.add(override);
         root.add("overrides", overrides);
-
-        // 9. Write the completely custom JsonObject to the file
-        //    We use 'this.writer' from the base BlockStateModelGenerator class
         itemModelGenerator.writer.accept(modelId, () -> root);
+
+        //Cast Model
+        JsonObject castRoot = new JsonObject();
+        castRoot.addProperty("parent", "minecraft:item/handheld_rod");
+
+        JsonObject castTextures = new JsonObject();
+        castTextures.addProperty("layer0", "rainstalker:item/stalkers_hook_cast");
+        castRoot.add("textures", castTextures);
+
+        itemModelGenerator.writer.accept(castModelId, () -> castRoot);
     }
 }
