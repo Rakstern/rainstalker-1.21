@@ -66,5 +66,9 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.SODDEN_OAK_BOAT, "Sodden Oak Boat");
         translationBuilder.add(ModItems.SODDEN_OAK_CHEST_BOAT, "Sodden Oak Chest Boat");
         translationBuilder.add(TagList.Items.SODDEN_OAK_LOGS, "Sodden Oak Logs");
+
+        //Paintings and Details
+        translationBuilder.add("painting.rainstalker.stalks_us.title", "Stalks Us");
+        translationBuilder.add("painting.rainstalker.stalks_us.author", "Rakstern");
     }
 }
