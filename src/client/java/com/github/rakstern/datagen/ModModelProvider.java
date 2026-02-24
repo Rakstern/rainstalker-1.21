@@ -6,10 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.ModelIds;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.Identifier;
 
@@ -33,7 +30,7 @@ public class ModModelProvider extends FabricModelProvider {
                 .log(ModBlocks.STRIPPED_SODDEN_OAK_LOG)
                 .wood(ModBlocks.STRIPPED_SODDEN_OAK_WOOD);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SODDEN_OAK_LEAVES);
+        blockStateModelGenerator.registerSingleton(ModBlocks.SODDEN_OAK_LEAVES, TexturedModel.LEAVES);
         blockStateModelGenerator.registerTintableCross(ModBlocks.SODDEN_OAK_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerHangingSign(ModBlocks.STRIPPED_SODDEN_OAK_LOG, ModBlocks.SODDEN_OAK_HANGING_SIGN, ModBlocks.SODDEN_OAK_WALL_HANGING_SIGN);
 

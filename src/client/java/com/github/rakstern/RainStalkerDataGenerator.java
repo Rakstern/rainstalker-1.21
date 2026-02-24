@@ -1,8 +1,12 @@
 package com.github.rakstern;
 
 import com.github.rakstern.datagen.*;
+import com.github.rakstern.world.ModConfiguredFeatures;
+import com.github.rakstern.world.ModPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.registry.RegistryBuilder;
+import net.minecraft.registry.RegistryKeys;
 
 public class RainStalkerDataGenerator implements DataGeneratorEntrypoint {
 
@@ -16,5 +20,12 @@ public class RainStalkerDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModEnglishLanguageProvider::new);
+        pack.addProvider(ModRegistryDataGenerator::new);
+    }
+
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder){
+        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
     }
 }

@@ -33,6 +33,7 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.add(ModBlocks.SODDEN_DIRT, "Sodden Dirt");
         translationBuilder.add(ModBlocks.MIRE_DIRT, "Mire Dirt");
+        translationBuilder.add("tooltip.rainstalker.magic_block.tooltip", "Touch and be slowed.");
 
         translationBuilder.add(ModItems.CONDENSED_DROPLET, "Condensed Droplet");
         translationBuilder.add("tooltip.rainstalker.condensed_hail.tooltip", "Not tasty.");
@@ -70,5 +71,7 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         //Paintings and Details
         translationBuilder.add("painting.rainstalker.stalks_us.title", "Stalks Us");
         translationBuilder.add("painting.rainstalker.stalks_us.author", "Rakstern");
+        translationBuilder.add("painting.rainstalker.scarecrow_relaxed.title", "Scarecrow Relaxed");
+        translationBuilder.add("painting.rainstalker.scarecrow_relaxed.author", "Rakstern");
     }
 }

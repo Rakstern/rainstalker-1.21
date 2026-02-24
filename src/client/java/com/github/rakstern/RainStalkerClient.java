@@ -5,10 +5,14 @@ import com.github.rakstern.item.ModItems;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.color.block.BlockColorProvider;
+import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.FoliageColors;
 
 public class RainStalkerClient implements ClientModInitializer {
 	@Override
@@ -32,5 +36,19 @@ public class RainStalkerClient implements ClientModInitializer {
                     }
                     return 0.0f;
                 }));
+
+        //Leaves
+        // For the Block itself
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+            if (world == null || pos == null) {
+                return FoliageColors.getDefaultColor();
+            }
+            return BiomeColors.getFoliageColor(world, pos);
+        }, ModBlocks.SODDEN_OAK_LEAVES);
+
+        // For the Item (in your hand/inventory)
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            return FoliageColors.getDefaultColor();
+        }, ModBlocks.SODDEN_OAK_LEAVES);
 	}
 }

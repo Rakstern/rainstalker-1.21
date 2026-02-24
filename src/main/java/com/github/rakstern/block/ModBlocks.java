@@ -5,6 +5,7 @@ import com.github.rakstern.block.custom.MagicBlock;
 import com.github.rakstern.item.ModItems;
 import com.github.rakstern.list.BlockSetTypeList;
 import com.github.rakstern.list.WoodTypeList;
+import com.github.rakstern.world.tree.ModSaplingGenerators;
 import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
@@ -35,6 +36,8 @@ public class ModBlocks {
 
         StrippableBlockRegistry.register(ModBlocks.SODDEN_OAK_LOG, ModBlocks.STRIPPED_SODDEN_OAK_LOG);
         StrippableBlockRegistry.register(ModBlocks.SODDEN_OAK_WOOD, ModBlocks.STRIPPED_SODDEN_OAK_WOOD);
+
+
     }
 
     public static final Block SODDEN_DIRT = register(
@@ -86,6 +89,7 @@ public class ModBlocks {
                     AbstractBlock.Settings.create()
                             .strength(2f)
                             .sounds(BlockSoundGroup.MUD)
+                            .velocityMultiplier(0.4f)
             ), "mire_dirt", true
     );
 
@@ -116,7 +120,7 @@ public class ModBlocks {
 
     public static final SaplingBlock SODDEN_OAK_SAPLING = register(
             new SaplingBlock(
-                    null,
+                    ModSaplingGenerators.SODDEN_OAK,
                     AbstractBlock.Settings.create()
                             .ticksRandomly()
                             .strength(0.0f)

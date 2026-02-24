@@ -23,6 +23,7 @@ public class MagicBlock extends Block {
         super(settings);
     }
 
+    /*
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if(entity instanceof LivingEntity livingEntity){
@@ -38,7 +39,7 @@ public class MagicBlock extends Block {
         }
 
         super.onSteppedOn(world, pos, state, entity);
-    }
+    }*///TO-DO: Maybe we'll use the magic block for something else
 
     private boolean isValidItem(ItemStack stack) {
         return stack.isIn(ModTags.Items.RAINSTALKER_DROP_ITEMS);
