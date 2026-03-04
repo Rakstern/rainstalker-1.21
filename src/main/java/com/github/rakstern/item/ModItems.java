@@ -3,10 +3,10 @@ package com.github.rakstern.item;
 import com.github.rakstern.ModBoats;
 import com.github.rakstern.RainStalker;
 import com.github.rakstern.block.ModBlocks;
+import com.github.rakstern.entity.ModEntities;
 import com.github.rakstern.item.custom.AdvancedFishingRodItem;
 import com.github.rakstern.item.custom.RotatorItem;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
-import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.FoodComponent;
@@ -18,6 +18,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
+import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -25,8 +26,8 @@ import java.util.List;
 public class ModItems {
 
     public static void initialize(){
-        Registry.register(Registries.ITEM_GROUP, CUSTOM_ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
-        ItemGroupEvents.modifyEntriesEvent(CUSTOM_ITEM_GROUP_KEY)
+        Registry.register(Registries.ITEM_GROUP, RAINSTALKER_ITEM_GROUP_KEY, RAINSTALKER_ITEM_GROUP);
+        ItemGroupEvents.modifyEntriesEvent(RAINSTALKER_ITEM_GROUP_KEY)
                 .register((itemGroup) -> {
                     itemGroup.add(ModItems.CONDENSED_DROPLET);
                     itemGroup.add(ModItems.CONDENSED_HAIL);
@@ -37,11 +38,13 @@ public class ModItems {
                     itemGroup.add(ModItems.SODDEN_OAK_HANGING_SIGN);
                     itemGroup.add(ModItems.SODDEN_OAK_BOAT);
                     itemGroup.add(ModItems.SODDEN_OAK_CHEST_BOAT);
+
+                    itemGroup.add(ModItems.RAINSTALKER_SPAWN_EGG);
                 });
     }
 
-    public static final RegistryKey<ItemGroup> CUSTOM_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(RainStalker.MOD_ID, "item_group"));
-    public static final ItemGroup CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
+    public static final RegistryKey<ItemGroup> RAINSTALKER_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(RainStalker.MOD_ID, "item_group"));
+    public static final ItemGroup RAINSTALKER_ITEM_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ModItems.CONDENSED_HAIL))
             .displayName(Text.translatable("itemGroup.rainstalker"))
             .build();
@@ -71,6 +74,7 @@ public class ModItems {
 
     public static final Item SODDEN_OAK_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.SODDEN_OAK_CHEST_BOAT_ID, ModBoats.SODDEN_OAK_BOAT_KEY, true);
 
+    public static final Item RAINSTALKER_SPAWN_EGG = register(new SpawnEggItem(ModEntities.RAINSTALKER, Colors.BLUE, Colors.WHITE, new Item.Settings()), "rainstalker_spawn_egg");
 
     public static <T extends Item> T register(T item, String id) {
         // Create the identifier for the item.

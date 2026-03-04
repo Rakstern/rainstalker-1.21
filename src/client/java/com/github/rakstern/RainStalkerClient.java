@@ -1,11 +1,14 @@
 package com.github.rakstern;
 
 import com.github.rakstern.block.ModBlocks;
+import com.github.rakstern.entity.ModEntities;
+import com.github.rakstern.entity.RainStalkerRenderer;
 import com.github.rakstern.item.ModItems;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -13,6 +16,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.FoliageColors;
+import net.minecraft.world.biome.GrassColors;
 
 public class RainStalkerClient implements ClientModInitializer {
 	@Override
@@ -21,7 +25,7 @@ public class RainStalkerClient implements ClientModInitializer {
         AdvancedFishingRodItemClient.registerClientOnlyEvents();
 
         //Block Render Layers
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.SODDEN_OAK_DOOR, ModBlocks.SODDEN_OAK_SAPLING, ModBlocks.SODDEN_OAK_LEAVES, ModBlocks.SODDEN_OAK_TRAPDOOR);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.SODDEN_OAK_DOOR, ModBlocks.SODDEN_OAK_SAPLING, ModBlocks.SODDEN_OAK_LEAVES, ModBlocks.SODDEN_OAK_TRAPDOOR, ModBlocks.SODDEN_GRASS_BLOCK);
 
         //Model Layers
         TerraformBoatClientHelper.registerModelLayers(ModBoats.SODDEN_OAK_BOAT_ID, false);
@@ -50,5 +54,20 @@ public class RainStalkerClient implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             return FoliageColors.getDefaultColor();
         }, ModBlocks.SODDEN_OAK_LEAVES);
+
+        // 1. For the Block in the world
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+            if (world == null || pos == null) return GrassColors.getDefaultColor();
+            return BiomeColors.getGrassColor(world, pos);
+        }, ModBlocks.SODDEN_GRASS_BLOCK);
+
+        // 2. For the Item in your hand/inventory
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            // Grass items use a constant "flat" color because they aren't in a biome yet
+            return GrassColors.getDefaultColor();
+        }, ModBlocks.SODDEN_GRASS_BLOCK);
+
+        // Register the renderer to the entity type
+        EntityRendererRegistry.register(ModEntities.RAINSTALKER, RainStalkerRenderer::new);
 	}
 }

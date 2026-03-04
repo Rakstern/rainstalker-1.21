@@ -2,6 +2,7 @@ package com.github.rakstern.datagen;
 
 import com.github.rakstern.RainStalker;
 import com.github.rakstern.block.ModBlocks;
+import com.github.rakstern.entity.ModEntities;
 import com.github.rakstern.item.ModItems;
 import com.github.rakstern.list.TagList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -32,12 +33,16 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("itemGroup.rainstalker", "RainStalker");
 
         translationBuilder.add(ModBlocks.SODDEN_DIRT, "Sodden Dirt");
+        translationBuilder.add(ModBlocks.SODDEN_GRASS_BLOCK, "Sodden Grass Block");
         translationBuilder.add(ModBlocks.MIRE_DIRT, "Mire Dirt");
         translationBuilder.add("tooltip.rainstalker.magic_block.tooltip", "Touch and be slowed.");
 
         translationBuilder.add(ModItems.CONDENSED_DROPLET, "Condensed Droplet");
         translationBuilder.add("tooltip.rainstalker.condensed_hail.tooltip", "Not tasty.");
         translationBuilder.add(ModItems.CONDENSED_HAIL, "Condensed Hail");
+
+        translationBuilder.add(ModItems.RAINSTALKER_SPAWN_EGG, "RainStalker Spawn Egg");
+        translationBuilder.add(ModEntities.RAINSTALKER, "RainStalker");
 
         //Tools
         translationBuilder.add(ModItems.STALKERS_HOOK, "Stalker's Hook");

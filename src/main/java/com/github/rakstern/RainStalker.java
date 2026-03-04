@@ -2,6 +2,7 @@ package com.github.rakstern;
 
 import com.github.rakstern.block.ModBlocks;
 import com.github.rakstern.component.ModDataComponentTypes;
+import com.github.rakstern.entity.ModEntities;
 import com.github.rakstern.item.ModItems;
 import com.github.rakstern.sound.ModSounds;
 import com.github.rakstern.world.gen.ModWorldGeneration;
@@ -30,6 +31,8 @@ public class RainStalker implements ModInitializer {
         ModSounds.initialize();
         ModDataComponentTypes.registerDataComponentTypes();
         ModWorldGeneration.generateModWorldGen();
+        ModEntities.registerModEntities();
+
 
 
 		LOGGER.info("Hello Fabric world!");

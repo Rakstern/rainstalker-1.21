@@ -2,6 +2,7 @@ package com.github.rakstern.block;
 
 import com.github.rakstern.RainStalker;
 import com.github.rakstern.block.custom.MagicBlock;
+import com.github.rakstern.block.custom.SoddenGrassBlock;
 import com.github.rakstern.item.ModItems;
 import com.github.rakstern.list.BlockSetTypeList;
 import com.github.rakstern.list.WoodTypeList;
@@ -30,7 +31,7 @@ public class ModBlocks {
     public static final List<Block> RAINSTALKER_BLOCKS = new ArrayList<>();
 
     public static void initialize(){
-        ItemGroupEvents.modifyEntriesEvent(ModItems.CUSTOM_ITEM_GROUP_KEY).register((itemGroup) -> {
+        ItemGroupEvents.modifyEntriesEvent(ModItems.RAINSTALKER_ITEM_GROUP_KEY).register((itemGroup) -> {
             RAINSTALKER_BLOCKS.forEach(itemGroup::add);
         });
 
@@ -48,6 +49,17 @@ public class ModBlocks {
             "sodden_dirt",
             true
     );
+
+    public static final SoddenGrassBlock SODDEN_GRASS_BLOCK = register(
+            new SoddenGrassBlock(AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DARK_GREEN)
+                    .ticksRandomly()
+                    .strength(0.6f)
+                    .sounds(BlockSoundGroup.WET_GRASS)),
+            "sodden_grass_block",
+            true
+    );
+
     public static final Block SODDEN_OAK_LOG = register(
             Blocks.createLogBlock(MapColor.BROWN, MapColor.DIRT_BROWN),
             "sodden_oak_log",

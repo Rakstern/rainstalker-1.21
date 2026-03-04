@@ -1,5 +1,6 @@
 package com.github.rakstern.datagen;
 
+import com.github.rakstern.RainStalker;
 import com.github.rakstern.block.ModBlocks;
 import com.github.rakstern.item.ModItems;
 import com.google.gson.JsonArray;
@@ -9,6 +10,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 public class ModModelProvider extends FabricModelProvider {
 
@@ -49,6 +52,33 @@ public class ModModelProvider extends FabricModelProvider {
                 .build();
         blockStateModelGenerator.registerCubeAllModelTexturePool(soddenOakFamily.getBaseBlock())
                 .family(soddenOakFamily);
+
+        //Sodden Grass Textures
+        // Defined Overlay since it doesn't seem to... exist??
+        TextureKey OVERLAY = TextureKey.of("overlay");
+
+        Model GRASS_BLOCK_TEMPLATE = new Model(
+                Optional.of(Identifier.of("minecraft", "block/grass_block")),
+                Optional.empty(),
+                TextureKey.TOP, TextureKey.BOTTOM, TextureKey.SIDE, OVERLAY, TextureKey.PARTICLE
+        );
+        //Map Textures
+        TextureMap soddenGrassTextures = new TextureMap()
+                .put(TextureKey.TOP, Identifier.of(RainStalker.MOD_ID, "block/sodden_grass_block_top"))
+                .put(TextureKey.SIDE, Identifier.of(RainStalker.MOD_ID, "block/sodden_grass_block_side"))
+                .put(TextureKey.BOTTOM, TextureMap.getId(ModBlocks.SODDEN_DIRT))
+                .put(OVERLAY, Identifier.of(RainStalker.MOD_ID, "block/sodden_grass_block_side_overlay"))
+                .put(TextureKey.PARTICLE, TextureMap.getId(ModBlocks.SODDEN_DIRT));
+
+        Identifier modelId = GRASS_BLOCK_TEMPLATE.upload(
+                ModBlocks.SODDEN_GRASS_BLOCK,
+                soddenGrassTextures,
+                blockStateModelGenerator.modelCollector
+        );
+
+        blockStateModelGenerator.blockStateCollector.accept(
+                BlockStateModelGenerator.createSingletonBlockState(ModBlocks.SODDEN_GRASS_BLOCK, modelId)
+        );
     }
 
     @Override
@@ -62,6 +92,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.SODDEN_OAK_BOAT, Models.GENERATED);
         itemModelGenerator.register(ModItems.SODDEN_OAK_CHEST_BOAT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAINSTALKER_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
     }
 
     private void generateFishingRodModels(ItemModelGenerator itemModelGenerator){
