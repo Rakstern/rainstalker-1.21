@@ -1,5 +1,7 @@
 package com.github.rakstern.mixin;
 
+import com.github.rakstern.entity.ModEntities;
+import com.github.rakstern.entity.custom.RainStalkerEntity;
 import com.github.rakstern.item.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -43,21 +45,25 @@ public abstract class FishingBobberEntityMixin {
         FishingBobberEntity bobber = (FishingBobberEntity)(Object)this;
         var player = this.getPlayerOwner();
 
-        // Check if player is using our custom rod
-        if (player != null && (player.getMainHandStack().isOf(ModItems.STALKERS_HOOK) ||
-                player.getOffHandStack().isOf(ModItems.STALKERS_HOOK))) {
-            if(entity.getType() == EntityType.ZOMBIE && !entity.getCommandTags().contains("fished_by_stalker")){
+        if (player == null) return;
+
+        boolean usingStalkersHook = player.getMainHandStack().isOf(ModItems.STALKERS_HOOK) ||
+                player.getOffHandStack().isOf(ModItems.STALKERS_HOOK);
+
+
+        if (usingStalkersHook && entity instanceof RainStalkerEntity stalker) {
+            if (!stalker.isFished()) {
                 if (!bobber.getWorld().isClient) {
-                    entity.addCommandTag("fished_by_stalker");
 
-                    // Spawn loot from the mob, currently uses BONES
-                    ItemEntity itemEntity = getItemEntity(entity, bobber, player);
+                    stalker.onFished();
+                    stalker.addCommandTag("fished_by_stalker"); //TO-DO: Maybe we don't need this anymore
 
+                    ItemEntity itemEntity = getItemEntity(stalker, bobber, player);
                     bobber.getWorld().spawnEntity(itemEntity);
-                    bobber.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.ENTITY_HOSTILE_SPLASH, SoundCategory.HOSTILE, 1.0f, 1.0f);
+                    bobber.getWorld().playSound(null, stalker.getBlockPos(),
+                            SoundEvents.ENTITY_HOSTILE_SPLASH, SoundCategory.HOSTILE, 1.0f, 1.0f);
                 }
 
-                // Cancel the vanilla movement logic so the mob isn't pulled toward the player
                 ci.cancel();
             }
         }
@@ -65,14 +71,19 @@ public abstract class FishingBobberEntityMixin {
 
     @Unique
     private static @NotNull ItemEntity getItemEntity(Entity entity, FishingBobberEntity bobber, PlayerEntity player) {
-        ItemStack loot = new ItemStack(Items.BONE); // Placeholder loot
-        ItemEntity itemEntity = new ItemEntity(bobber.getWorld(), entity.getX(), entity.getY(), entity.getZ(), loot);
+        ItemStack loot = new ItemStack(ModItems.CONDENSED_DROPLET); // TO-DO: Condensed Droplet? Or maybe something else?
 
-        // Calculate trajectory (though it doesn't feel like the item actually flies to the player like fishing normally does...)
-        double d = player.getX() - bobber.getX();
-        double e = player.getY() - bobber.getY();
-        double f = player.getZ() - bobber.getZ();
-        itemEntity.setVelocity(d * 0.1, e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08, f * 0.1);
+        // Spawn it slightly higher (entity.getY() + 0.5) so it doesn't get stuck in the floor
+        ItemEntity itemEntity = new ItemEntity(bobber.getWorld(), entity.getX(), entity.getY() + 0.5, entity.getZ(), loot);
+
+        // Vector from the mob to the player
+        double d = player.getX() - entity.getX();
+        double e = player.getY() - entity.getY();
+        double f = player.getZ() - entity.getZ();
+
+        // 0.15 gives a stronger horizontal pull than 0.1
+        // Adding a flat 0.3 to the Y-velocity ensures it ALWAYS arcs upward
+        itemEntity.setVelocity(d * 0.15, e * 0.15 + 0.3, f * 0.15);
         return itemEntity;
     }
 }

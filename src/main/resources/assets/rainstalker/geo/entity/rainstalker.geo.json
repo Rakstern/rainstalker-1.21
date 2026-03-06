@@ -22,6 +22,7 @@
 				{
 					"name": "head",
 					"pivot": [0, 39, 0],
+					"rotation": [5, 0, 0],
 					"cubes": [
 						{"origin": [-4, 41, -4], "size": [8, 8, 8], "uv": [0, 0]}
 					]
@@ -29,6 +30,7 @@
 				{
 					"name": "headwear",
 					"pivot": [0, 39, 0],
+					"rotation": [5, 0, 0],
 					"cubes": [
 						{"origin": [-4, 41, -4], "size": [8, 8, 8], "inflate": -0.5, "uv": [0, 16]}
 					]
@@ -52,7 +54,7 @@
 					"name": "right_leg",
 					"pivot": [-2, 30, 0],
 					"cubes": [
-						{"origin": [-3, 0, -1], "size": [2, 32, 2], "uv": [63, 0]}
+						{"origin": [-3, 0, -1], "size": [2, 32, 2], "uv": [64, 0]}
 					]
 				},
 				{
@@ -60,7 +62,7 @@
 					"pivot": [2, 30, 0],
 					"mirror": true,
 					"cubes": [
-						{"origin": [1, 0, -1], "size": [2, 32, 2], "uv": [63, 0]}
+						{"origin": [1, 0, -1], "size": [2, 32, 2], "uv": [64, 0]}
 					]
 				}
 			]
