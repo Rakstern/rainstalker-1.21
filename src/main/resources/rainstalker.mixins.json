@@ -1,9 +1,8 @@
 {
   "required": true,
-  "package": "com.github.rakstern.mixin",
+  "package": "com.github.rakstern.rainstalker.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ExampleMixin",
     "FishingBobberEntityMixin"
   ],
   "injectors": {
