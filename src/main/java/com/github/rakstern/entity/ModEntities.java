@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 public class ModEntities {
     public static final EntityType<RainStalkerEntity> RAINSTALKER = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(RainStalker.MOD_ID, "rainstalker"),
-            EntityType.Builder.create(RainStalkerEntity::new, SpawnGroup.CREATURE)
+            EntityType.Builder.create(RainStalkerEntity::new, SpawnGroup.MONSTER)
                     .dimensions(0.6f, 3f).build());
 
     public static void registerModEntities(){

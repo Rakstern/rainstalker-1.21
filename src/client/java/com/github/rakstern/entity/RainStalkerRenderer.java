@@ -41,4 +41,23 @@ public class RainStalkerRenderer extends GeoEntityRenderer<RainStalkerEntity> {
         return RenderLayer.getEntityTranslucent(texture);
     }
 
+
+    @Override
+    public void actuallyRender(MatrixStack poseStack, RainStalkerEntity animatable, BakedGeoModel model,
+                               @Nullable RenderLayer renderType, VertexConsumerProvider bufferSource,
+                               @Nullable VertexConsumer buffer, boolean isReRender, float partialTick,
+                               int packedLight, int packedOverlay, int colour) {
+
+        // Helper to keep this somewhat clean
+        int finalColour = setAlpha(colour, animatable.getOpacity());
+
+        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer,
+                isReRender, partialTick, packedLight, packedOverlay, finalColour);
+    }
+
+    // Helper method
+    private int setAlpha(int color, float opacity) {
+        int alpha = (int) (opacity * 255.0F); // Convert 0-1.0 to 0-255
+        return (alpha << 24) | (color & 0xFFFFFF); // Swap the alpha bits
+    }
 }
