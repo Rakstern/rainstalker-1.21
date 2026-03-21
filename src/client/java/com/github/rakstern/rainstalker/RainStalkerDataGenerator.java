@@ -3,6 +3,7 @@ package com.github.rakstern.rainstalker;
 import com.github.rakstern.rainstalker.datagen.*;
 import com.github.rakstern.rainstalker.world.ModConfiguredFeatures;
 import com.github.rakstern.rainstalker.world.ModPlacedFeatures;
+import com.github.rakstern.rainstalker.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;

@@ -26,37 +26,7 @@ public class ModWorldGenerator extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        /*
-        RegistryEntry<DimensionType> soddenTypeEntry = entries.add(ModDimensions.SODDEN_TYPE_KEY, new DimensionType(
-                OptionalLong.empty(),
-                true,
-                false,
-                false,
-                true,
-                1.0,
-                true,
-                false,
-                -64,
-                384,
-                384,
-                BlockTags.INFINIBURN_OVERWORLD,
-                DimensionTypes.OVERWORLD_ID,
-                0.1f,
-                new DimensionType.MonsterSettings(false, false, UniformIntProvider.create(0, 7), 0)
-        ));
 
-        var noiseSettings = registries.getWrapperOrThrow(RegistryKeys.CHUNK_GENERATOR_SETTINGS);
-        var biomeRegistry = registries.getWrapperOrThrow(RegistryKeys.BIOME);
-
-
-        entries.add(ModDimensions.SODDEN_OPTIONS_KEY, new DimensionOptions(
-                soddenTypeEntry,
-                new NoiseChunkGenerator(
-                        new FixedBiomeSource(biomeRegistry.getOrThrow(BiomeKeys.SWAMP)),
-                        noiseSettings.getOrThrow(ChunkGeneratorSettings.OVERWORLD)
-                )
-        )); //TO-DO: This is causing errors, maybe we can't datagen this?
-         */
     }
 
     @Override
