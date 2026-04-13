@@ -13,9 +13,13 @@ This mod adds a new mob to the world; the Rainstalker. Those who overcome the ev
 
 ## 📦 Installation
 
-1.  Ensure you have the **Fabric Loader** installed for Minecraft 1.21.
-2.  Download the latest release from the [Releases](https://github.com/rakstern/rainstalker-1.21/releases) page.
-3.  Place the `.jar` file into your `%appdata%/.minecraft/mods` folder.
-4.  Profit???
+1.  **Install Fabric Loader:** Download and run the installer for **1.21** from [fabricmc.net](https://fabricmc.net/use/installer/).
+2.  **Download Fabric API:** This mod requires the **Fabric API** to function. Download the version for **1.21** from [Modrinth](https://modrinth.com/mod/fabric-api) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api).
+3.  **Download Rainstalker:** Grab the latest `.jar` file from the [Releases](https://github.com/rakstern/rainstalker-1.21/releases) page.
+4.  **Add to Mods Folder:** Press `Win + R`, type `%appdata%/.minecraft`, and hit Enter.
+    * Open the `mods` folder (create it if it doesn't exist).
+    * Drop both the **Fabric API** jar and the **Rainstalker** jar inside.
+
+Note: This mod includes GeckoLib and Terraform Wood API. You do not need to download them separately!
 
 **Developed by [rakstern](https://github.com/rakstern)**
