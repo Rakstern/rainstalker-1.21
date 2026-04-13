@@ -3,7 +3,8 @@
   "package": "com.github.rakstern.rainstalker.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "FishingBobberEntityMixin"
+    "FishingBobberEntityMixin",
+    "WorldWeatherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

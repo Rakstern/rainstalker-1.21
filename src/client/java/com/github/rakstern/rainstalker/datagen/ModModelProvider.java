@@ -79,6 +79,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.blockStateCollector.accept(
                 BlockStateModelGenerator.createSingletonBlockState(ModBlocks.SODDEN_GRASS_BLOCK, modelId)
         );
+
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.KINGCUP, ModBlocks.POTTED_KINGCUP, BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override
@@ -94,6 +96,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.SODDEN_OAK_CHEST_BOAT, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAINSTALKER_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(ModItems.RAINSTALKER_CORE, Models.GENERATED);
     }
 
     private void generateFishingRodModels(ItemModelGenerator itemModelGenerator){

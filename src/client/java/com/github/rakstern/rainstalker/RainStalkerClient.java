@@ -24,7 +24,9 @@ public class RainStalkerClient implements ClientModInitializer {
         AdvancedFishingRodItemClient.registerClientOnlyEvents();
 
         //Block Render Layers
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.SODDEN_OAK_DOOR, ModBlocks.SODDEN_OAK_SAPLING, ModBlocks.SODDEN_OAK_LEAVES, ModBlocks.SODDEN_OAK_TRAPDOOR, ModBlocks.SODDEN_GRASS_BLOCK);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
+                ModBlocks.SODDEN_OAK_DOOR, ModBlocks.SODDEN_OAK_SAPLING, ModBlocks.SODDEN_OAK_LEAVES,
+                ModBlocks.SODDEN_OAK_TRAPDOOR, ModBlocks.SODDEN_GRASS_BLOCK, ModBlocks.KINGCUP, ModBlocks.POTTED_KINGCUP);
 
         //Model Layers
         TerraformBoatClientHelper.registerModelLayers(ModBoats.SODDEN_OAK_BOAT_ID, false);

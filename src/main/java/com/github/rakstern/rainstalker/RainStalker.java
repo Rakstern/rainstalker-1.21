@@ -5,10 +5,14 @@ import com.github.rakstern.rainstalker.component.ModDataComponentTypes;
 import com.github.rakstern.rainstalker.entity.ModEntities;
 import com.github.rakstern.rainstalker.item.ModItems;
 import com.github.rakstern.rainstalker.sound.ModSounds;
+import com.github.rakstern.rainstalker.world.biome.surface.ModMaterialRules;
+import com.github.rakstern.rainstalker.world.dimension.ModDimensions;
 import com.github.rakstern.rainstalker.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.level.ServerWorldProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +36,7 @@ public class RainStalker implements ModInitializer {
         ModDataComponentTypes.registerDataComponentTypes();
         ModWorldGeneration.generateModWorldGen();
         ModEntities.registerModEntities();
-
+        //ModMaterialRules.makeRules(); //TO-DO: Address later, world generation required noise settings directly edited
 
 
 		LOGGER.info("Hello Fabric world!");

@@ -19,7 +19,13 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(ModTags.Items.RAINSTALKER_DROP_ITEMS)
-                .add(ModItems.CONDENSED_DROPLET);
+                .add(ModItems.CONDENSED_DROPLET)
+                .add(ModItems.RAINSTALKER_CORE);
+
+        getOrCreateTagBuilder(ItemTags.DIRT)
+                .add(ModBlocks.SODDEN_DIRT.asItem())
+                .add(ModBlocks.SODDEN_GRASS_BLOCK.asItem())
+                .add(ModBlocks.MIRE_DIRT.asItem());
 
         getOrCreateTagBuilder(TagList.Items.SODDEN_OAK_LOGS)
                 .add(ModBlocks.SODDEN_OAK_LOG.asItem())

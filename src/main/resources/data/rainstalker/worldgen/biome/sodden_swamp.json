@@ -1,0 +1,32 @@
+{
+  "has_precipitation": true,
+  "temperature": 0.5,
+  "downfall": 1.0,
+  "effects": {
+    "sky_color": 3355443,
+    "fog_color": 2236962,
+    "water_color": 3163459,
+    "water_fog_color": 1119771,
+    "grass_color": 5530945,
+    "foliage_color": 4872505,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "carvers": {
+    "air": [ "minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon" ]
+  },
+  "features": [
+    [], [], [], [], [], [], ["rainstalker:mire_patch_placed"], [], [], ["rainstalker:sodden_oak_placed"], []
+  ],
+  "creature_spawn_probability": 0.07,
+  "spawners": {
+    "monster": [
+      { "type": "minecraft:slime", "weight": 100, "minCount": 4, "maxCount": 4 }
+    ]
+  },
+  "spawn_costs": {}
+}

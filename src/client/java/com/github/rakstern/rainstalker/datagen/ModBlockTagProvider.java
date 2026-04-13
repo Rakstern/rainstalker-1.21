@@ -20,7 +20,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.DIRT)
                 .add(ModBlocks.MIRE_DIRT)
-                .add(ModBlocks.SODDEN_DIRT); //Apparently also makes them work with shovel mining
+                .add(ModBlocks.SODDEN_DIRT)
+                .add(ModBlocks.SODDEN_GRASS_BLOCK); //Apparently also makes them work with shovel mining
 
         getOrCreateTagBuilder(TagList.Blocks.SODDEN_OAK_LOGS)
                 .add(ModBlocks.SODDEN_OAK_LOG)

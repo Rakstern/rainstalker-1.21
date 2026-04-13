@@ -6,6 +6,7 @@ import com.github.rakstern.rainstalker.block.ModBlocks;
 import com.github.rakstern.rainstalker.entity.ModEntities;
 import com.github.rakstern.rainstalker.item.custom.AdvancedFishingRodItem;
 import com.github.rakstern.rainstalker.item.custom.DownpourWarpItem;
+import com.github.rakstern.rainstalker.item.custom.RainStalkerCoreItem;
 import com.github.rakstern.rainstalker.item.custom.RotatorItem;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -21,6 +22,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class ModItems {
                     itemGroup.add(ModItems.SODDEN_OAK_CHEST_BOAT);
 
                     itemGroup.add(ModItems.RAINSTALKER_SPAWN_EGG);
+                    itemGroup.add(ModItems.RAINSTALKER_CORE);
                 });
     }
 
@@ -78,6 +81,10 @@ public class ModItems {
     public static final Item SODDEN_OAK_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.SODDEN_OAK_CHEST_BOAT_ID, ModBoats.SODDEN_OAK_BOAT_KEY, true);
 
     public static final Item RAINSTALKER_SPAWN_EGG = register(new SpawnEggItem(ModEntities.RAINSTALKER, Colors.BLUE, Colors.WHITE, new Item.Settings()), "rainstalker_spawn_egg");
+
+    public static final Item RAINSTALKER_CORE = register(new RainStalkerCoreItem(new Item.Settings()
+            .maxCount(1).rarity(Rarity.RARE)),
+            "rainstalker_core"); //TO-DO: Redo the texture
 
     public static <T extends Item> T register(T item, String id) {
         // Create the identifier for the item.

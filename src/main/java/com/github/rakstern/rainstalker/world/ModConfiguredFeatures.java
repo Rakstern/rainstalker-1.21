@@ -7,13 +7,13 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.CherryFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
 import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
@@ -22,6 +22,7 @@ import java.util.List;
 public class ModConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> SODDEN_OAK_KEY = registerKey("sodden_oak");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MIRE_PATCH_KEY = registerKey("mire_patch");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context){
 /*
@@ -47,6 +48,16 @@ public class ModConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 2)
         ).decorators(List.of(new LeavesVineTreeDecorator(0.10f))).build());
         //TO-DO: Improve tree, maybe with custom blocks on the underside rather than vines? Or somehow custom vines??
+
+        register(context, MIRE_PATCH_KEY, Feature.DISK, new DiskFeatureConfig(
+                new PredicatedStateProvider(
+                        BlockStateProvider.of(ModBlocks.MIRE_DIRT),
+                        List.of() // List of rules; empty means it always places Mire
+                ),
+                BlockPredicate.matchingBlocks(ModBlocks.SODDEN_DIRT, ModBlocks.SODDEN_GRASS_BLOCK),
+                UniformIntProvider.create(1, 3),
+                1
+        ));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name){

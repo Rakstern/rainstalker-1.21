@@ -28,7 +28,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         addDrop(ModBlocks.SODDEN_DIRT);
         addDrop(ModBlocks.MIRE_DIRT);
-
+        addDrop(ModBlocks.SODDEN_GRASS_BLOCK);
+        addDrop(ModBlocks.KINGCUP);
+        addPottedPlantDrops(ModBlocks.POTTED_KINGCUP);
 
         //Example, not intended, could be unbalanced
         //addDrop(ModBlocks.SODDEN_DIRT, multipleOreDrops(ModBlocks.SODDEN_DIRT, ModItems.CONDENSED_DROPLET, 3, 5));

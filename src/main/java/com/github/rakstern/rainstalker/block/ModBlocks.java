@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -292,6 +293,17 @@ public class ModBlocks {
                             .burnable()
             ),
             "sodden_oak_wall_hanging_sign",
+            false
+    );
+
+    public static final Block KINGCUP = register(
+            new FlowerBlock(StatusEffects.WATER_BREATHING, 20, AbstractBlock.Settings.copy(Blocks.ALLIUM)),
+            "kingcup",
+            true
+    );
+    public static final Block POTTED_KINGCUP = register(
+            new FlowerPotBlock(KINGCUP, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM)),
+            "potted_kingcup",
             false
     );
 

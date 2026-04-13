@@ -36,6 +36,7 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.SODDEN_GRASS_BLOCK, "Sodden Grass Block");
         translationBuilder.add(ModBlocks.MIRE_DIRT, "Mire Dirt");
         translationBuilder.add("tooltip.rainstalker.magic_block.tooltip", "Touch and be slowed.");
+        translationBuilder.add(ModBlocks.KINGCUP, "Kingcup");
 
         translationBuilder.add(ModItems.CONDENSED_DROPLET, "Condensed Droplet");
         translationBuilder.add("tooltip.rainstalker.condensed_hail.tooltip", "Not tasty.");
@@ -43,6 +44,7 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.RAINSTALKER_SPAWN_EGG, "RainStalker Spawn Egg");
         translationBuilder.add(ModEntities.RAINSTALKER, "RainStalker");
+        translationBuilder.add(ModItems.RAINSTALKER_CORE, "Rainstalker Core");
 
         //Tools
         translationBuilder.add(ModItems.STALKERS_HOOK, "Stalker's Hook");
