@@ -12,6 +12,7 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
@@ -146,6 +147,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .build();
 
         generateFamily(recipeExporter, soddenOakFamily, FeatureSet.empty());
+
+        /*
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Items.YELLOW_DYE)
+                .input(ModBlocks.KINGCUP)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.KINGCUP), FabricRecipeProvider.conditionsFromItem(ModBlocks.KINGCUP))
+                .offerTo(recipeExporter);
+
+         */
+
+        offerShapelessRecipe(recipeExporter, Items.YELLOW_DYE, ModBlocks.KINGCUP, "yellow_dye", 1);
     }
 
     private static @NotNull String hasTag(@NotNull TagKey<Item> tag){

@@ -306,6 +306,11 @@ public class ModBlocks {
             "potted_kingcup",
             false
     );
+    public static final ShortPlantBlock SODDEN_SHORT_GRASS = register(
+            new ShortPlantBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS)),
+            "sodden_short_grass",
+            true
+    );
 
     public static <T extends Block> T register(T block, String name, boolean shouldRegisterItem) {
         // Register the block and its item.

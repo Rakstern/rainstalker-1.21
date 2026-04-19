@@ -17,6 +17,7 @@ public class ModPlacedFeatures {
 
     public static final RegistryKey<PlacedFeature> SODDEN_OAK_PLACED_KEY = registerKey("sodden_oak_placed");
     public static final RegistryKey<PlacedFeature> MIRE_PATCH_PLACED_KEY = registerKey("mire_patch_placed");
+    public static final RegistryKey<PlacedFeature> SODDEN_VEGETATION_PLACED_KEY = registerKey("sodden_vegetation_placed");
 
 
     public static void bootstrap(Registerable<PlacedFeature> context){
@@ -36,6 +37,16 @@ public class ModPlacedFeatures {
                         // Find the surface height
                         HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
                         // Only place if the biome says it's allowed here
+                        BiomePlacementModifier.of()
+                )
+        );
+
+        register(context, SODDEN_VEGETATION_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SODDEN_VEGETATION_KEY),
+                List.of(
+                        // Frequency: One per chunk
+                        CountPlacementModifier.of(1),
+                        SquarePlacementModifier.of(),
+                        PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
                         BiomePlacementModifier.of()
                 )
         );

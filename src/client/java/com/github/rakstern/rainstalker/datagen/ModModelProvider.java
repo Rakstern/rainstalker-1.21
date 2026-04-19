@@ -81,6 +81,8 @@ public class ModModelProvider extends FabricModelProvider {
         );
 
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.KINGCUP, ModBlocks.POTTED_KINGCUP, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        blockStateModelGenerator.registerTintableCross(ModBlocks.SODDEN_SHORT_GRASS, BlockStateModelGenerator.TintType.TINTED);
     }
 
     @Override

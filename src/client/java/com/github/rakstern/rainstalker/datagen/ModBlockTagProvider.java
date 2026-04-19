@@ -73,5 +73,18 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
                 .add(ModBlocks.SODDEN_OAK_WALL_HANGING_SIGN);
+
+        getOrCreateTagBuilder(BlockTags.BEE_GROWABLES)
+                .add(ModBlocks.KINGCUP);
+        getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS)
+                .add(ModBlocks.KINGCUP);
+        getOrCreateTagBuilder(BlockTags.FLOWERS)
+                .add(ModBlocks.KINGCUP);
+
+        getOrCreateTagBuilder(BlockTags.REPLACEABLE_BY_TREES)
+                .add(ModBlocks.SODDEN_SHORT_GRASS);
+
+        getOrCreateTagBuilder(BlockTags.REPLACEABLE)
+                .add(ModBlocks.SODDEN_SHORT_GRASS);
     }
 }

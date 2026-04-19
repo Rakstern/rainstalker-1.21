@@ -2,10 +2,12 @@ package com.github.rakstern.rainstalker.world;
 
 import com.github.rakstern.rainstalker.RainStalker;
 import com.github.rakstern.rainstalker.block.ModBlocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
@@ -14,6 +16,7 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.CherryFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
@@ -23,6 +26,7 @@ public class ModConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> SODDEN_OAK_KEY = registerKey("sodden_oak");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MIRE_PATCH_KEY = registerKey("mire_patch");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SODDEN_VEGETATION_KEY = registerKey("sodden_vegetation");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context){
 /*
@@ -58,6 +62,21 @@ public class ModConfiguredFeatures {
                 UniformIntProvider.create(1, 3),
                 1
         ));
+
+        register(context, SODDEN_VEGETATION_KEY, Feature.RANDOM_PATCH,
+                new RandomPatchFeatureConfig(
+                        32, // tries
+                        7,  // xz spread
+                        3,  // y spread
+                        PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(
+                                        new DataPool.Builder<BlockState>()
+                                                .add(ModBlocks.SODDEN_SHORT_GRASS.getDefaultState(), 80) // 80% weight
+                                                .add(ModBlocks.KINGCUP.getDefaultState(), 20)            // 20% weight
+                                                .build()
+                                )))
+                )
+        );
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name){

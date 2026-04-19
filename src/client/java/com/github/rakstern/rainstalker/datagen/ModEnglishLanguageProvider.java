@@ -31,13 +31,18 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
 
         translationBuilder.add("itemGroup.rainstalker", "RainStalker");
+        translationBuilder.add("rainstalker_drop_items", "RainStalker Drop Items");
 
+        //Natural Blocks
         translationBuilder.add(ModBlocks.SODDEN_DIRT, "Sodden Dirt");
         translationBuilder.add(ModBlocks.SODDEN_GRASS_BLOCK, "Sodden Grass Block");
         translationBuilder.add(ModBlocks.MIRE_DIRT, "Mire Dirt");
         translationBuilder.add("tooltip.rainstalker.magic_block.tooltip", "Touch and be slowed.");
         translationBuilder.add(ModBlocks.KINGCUP, "Kingcup");
+        translationBuilder.add(ModBlocks.POTTED_KINGCUP, "Potted Kingcup");
+        translationBuilder.add(ModBlocks.SODDEN_SHORT_GRASS, "Sodden Short Grass");
 
+        //RainStalker Stuff
         translationBuilder.add(ModItems.CONDENSED_DROPLET, "Condensed Droplet");
         translationBuilder.add("tooltip.rainstalker.condensed_hail.tooltip", "Not tasty.");
         translationBuilder.add(ModItems.CONDENSED_HAIL, "Condensed Hail");
@@ -80,5 +85,13 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("painting.rainstalker.stalks_us.author", "Rakstern");
         translationBuilder.add("painting.rainstalker.scarecrow_relaxed.title", "Scarecrow Relaxed");
         translationBuilder.add("painting.rainstalker.scarecrow_relaxed.author", "Rakstern");
+
+        //Effects
+        translationBuilder.add("effect.rainstalker.downpour_warp", "Downpour Warp");
+
+        //Potions
+        translationBuilder.add("item.minecraft.potion.effect.downpour_warp_potion", "Downpour Warp Potion");
+        translationBuilder.add("item.minecraft.splash_potion.effect.downpour_warp_potion", "Downpour Warp Splash Potion");
+        translationBuilder.add("item.minecraft.lingering_potion.effect.downpour_warp_potion", "Downpour Warp Lingering Potion");
     }
 }
