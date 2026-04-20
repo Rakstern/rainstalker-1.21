@@ -148,13 +148,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         generateFamily(recipeExporter, soddenOakFamily, FeatureSet.empty());
 
-        /*
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Items.YELLOW_DYE)
-                .input(ModBlocks.KINGCUP)
-                .criterion(FabricRecipeProvider.hasItem(ModBlocks.KINGCUP), FabricRecipeProvider.conditionsFromItem(ModBlocks.KINGCUP))
-                .offerTo(recipeExporter);
 
-         */
 
         offerShapelessRecipe(recipeExporter, Items.YELLOW_DYE, ModBlocks.KINGCUP, "yellow_dye", 1);
 
@@ -163,6 +157,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(ModItems.CONDENSED_DROPLET)
                 .input(ModBlocks.KINGCUP.asItem())
                 .criterion(hasItem(ModItems.CONDENSED_DROPLET), conditionsFromItem(ModItems.CONDENSED_DROPLET))
+                .offerTo(recipeExporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.STALKERS_HOOK, 1)
+                .input('I', ConventionalItemTags.IRON_INGOTS)
+                .input('C', ModItems.CONDENSED_DROPLET)
+                .input('S', ConventionalItemTags.STRINGS)
+                .input('P',Items.PURPLE_DYE)
+                .pattern(" PI")
+                .pattern("PIS")
+                .pattern("I C")
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CONDENSED_DROPLET), FabricRecipeProvider.conditionsFromItem(ModItems.CONDENSED_DROPLET))
                 .offerTo(recipeExporter);
     }
 

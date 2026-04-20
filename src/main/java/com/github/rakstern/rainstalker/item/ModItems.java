@@ -58,8 +58,7 @@ public class ModItems {
             .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 3 * 20, 1), 1.0f)
             .build();
 
-    //public static final Item CONDENSED_DROPLET = register(new Item(new Item.Settings()),"condensed_droplet");
-    public static final Item CONDENSED_DROPLET = register(new DownpourWarpItem(new Item.Settings()),"condensed_droplet");
+    public static final Item CONDENSED_DROPLET = register(new Item(new Item.Settings()),"condensed_droplet");
     //TO-DO: Temporarily turned the droplet into a warp item
     public static final Item CONDENSED_HAIL = register(new Item(new Item.Settings().food(FROZEN_FOOD_COMPONENT)){
         @Override

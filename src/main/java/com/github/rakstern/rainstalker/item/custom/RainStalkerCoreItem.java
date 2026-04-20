@@ -52,6 +52,9 @@ public class RainStalkerCoreItem extends Item {
 
                 // Visual/Sound FX
                 world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0f, 0.5f);
+                if (player != null && !player.getAbilities().creativeMode) {
+                    context.getStack().decrement(1);
+                }
             }
             return ActionResult.SUCCESS;
         }
