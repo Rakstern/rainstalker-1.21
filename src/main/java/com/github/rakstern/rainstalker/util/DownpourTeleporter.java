@@ -1,6 +1,8 @@
 package com.github.rakstern.rainstalker.util;
 
 import com.github.rakstern.rainstalker.block.ModBlocks;
+import com.github.rakstern.rainstalker.world.dimension.ModDimensions;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -100,17 +102,19 @@ public class DownpourTeleporter {
         ServerWorld targetWorld = server.getWorld(targetWorldKey);
         if (targetWorld == null) return;
 
-        // Search for a portal within a 48-block horizontal radius in the target dimension
+        // Look for an existing portal
         BlockPos portalPos = findNearestPortal(targetWorld, player.getBlockPos(), 48);
 
+        // Generate one if none found
+        if (portalPos == null) {
+            portalPos = generatePortal(targetWorld, player.getBlockPos(), targetWorldKey);
+        }
+
+        // Teleport in front of the portal
         if (portalPos != null) {
             BlockState portalState = targetWorld.getBlockState(portalPos);
             Direction facing = portalState.get(HorizontalFacingBlock.FACING);
-
-            // Place the player one block in front of the portal's facing direction
             BlockPos frontPos = portalPos.offset(facing);
-
-            // Rotate the player to face back toward the portal
             float yaw = facing.getOpposite().asRotation();
 
             player.teleport(targetWorld,
@@ -120,10 +124,176 @@ public class DownpourTeleporter {
                     yaw,
                     player.getPitch());
         } else {
-            // No portal found in range — fall back to standard safe-spot teleport
+            // Ultimate fallback — no tree found at all
             teleport(player, targetWorldKey);
         }
     }
+
+    private static BlockPos generatePortal(ServerWorld world, BlockPos center, RegistryKey<World> targetWorldKey) {
+        if (targetWorldKey == ModDimensions.DOWNPOUR_WORLD_KEY) {
+            return generatePortalInDownpour(world, center);
+        } else {
+            return generatePortalInOverworld(world, center);
+        }
+    }
+
+    //Portal in the downpour
+    private static BlockPos generatePortalInDownpour(ServerWorld world, BlockPos center) {
+        BlockPos trunkBase = findNearestTrunkBase(world, center, 48, ModBlocks.SODDEN_OAK_LOG);
+        if (trunkBase == null) return null;
+
+        Direction facing = findAirFacing(world, trunkBase);
+
+        world.setBlockState(trunkBase, ModBlocks.SODDEN_PORTAL_BOTTOM.getDefaultState()
+                .with(HorizontalFacingBlock.FACING, facing));
+        world.setBlockState(trunkBase.up(), ModBlocks.SODDEN_PORTAL_TOP.getDefaultState()
+                .with(HorizontalFacingBlock.FACING, facing));
+
+        ensureClearFront(world, trunkBase, facing);
+        return trunkBase;
+    }
+
+    //Portal in the overworld
+    private static BlockPos generatePortalInOverworld(ServerWorld world, BlockPos center) {
+        BlockPos groundPos = null;
+        java.util.Random random = new java.util.Random();
+
+        for (int i = 0; i < 10; i++) {
+            int ox = random.nextInt(32) - 16;
+            int oz = random.nextInt(32) - 16;
+            BlockPos result = findSafeSpot(center.add(ox, 0, oz), world);
+            if (result != null) {
+                groundPos = result;
+                break;
+            }
+        }
+
+        if (groundPos == null) {
+            groundPos = new BlockPos(center.getX(), 80, center.getZ());
+            createSafePlatform(world, groundPos);
+        }
+
+        // Build the tree first (all 5 logs), then overwrite the bottom 2 with portal blocks
+        placeSoddenOakTree(world, groundPos);
+
+        Direction facing = findAirFacing(world, groundPos);
+
+        world.setBlockState(groundPos, ModBlocks.SODDEN_PORTAL_BOTTOM.getDefaultState()
+                .with(HorizontalFacingBlock.FACING, facing));
+        world.setBlockState(groundPos.up(), ModBlocks.SODDEN_PORTAL_TOP.getDefaultState()
+                .with(HorizontalFacingBlock.FACING, facing));
+
+        ensureClearFront(world, groundPos, facing);
+        return groundPos;
+    }
+
+
+    //Find the base of a tree...
+    private static BlockPos findNearestTrunkBase(ServerWorld world, BlockPos center, int radius, Block logBlock) {
+        BlockPos nearest = null;
+        double nearestDistSq = Double.MAX_VALUE;
+
+        int minCX = (center.getX() - radius) >> 4;
+        int maxCX = (center.getX() + radius) >> 4;
+        int minCZ = (center.getZ() - radius) >> 4;
+        int maxCZ = (center.getZ() + radius) >> 4;
+
+        for (int cx = minCX; cx <= maxCX; cx++) {
+            for (int cz = minCZ; cz <= maxCZ; cz++) {
+                world.getChunk(cx, cz);
+            }
+        }
+
+        for (int dx = -radius; dx <= radius; dx++) {
+            for (int dz = -radius; dz <= radius; dz++) {
+                int x = center.getX() + dx;
+                int z = center.getZ() + dz;
+
+                for (int y = world.getBottomY() + 1; y < world.getTopY() - 1; y++) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    if (!world.getBlockState(pos).isOf(logBlock)) continue;
+
+                    BlockState below = world.getBlockState(pos.down());
+                    BlockState above = world.getBlockState(pos.up());
+
+                    // Log sitting on solid ground with another log above = trunk base
+                    if (!below.isOf(logBlock) && !below.isAir() && above.isOf(logBlock)) {
+                        double distSq = dx * dx + dz * dz;
+                        if (distSq < nearestDistSq) {
+                            nearestDistSq = distSq;
+                            nearest = pos.toImmutable();
+                        }
+                        break; // only one trunk base per column
+                    }
+                }
+            }
+        }
+        return nearest;
+    }
+
+    //Find a suitable direction
+    private static Direction findAirFacing(World world, BlockPos portalBottom) {
+        for (Direction dir : Direction.Type.HORIZONTAL) {
+            BlockPos front = portalBottom.offset(dir);
+            if (world.getBlockState(front).isAir() && world.getBlockState(front.up()).isAir()) {
+                return dir;
+            }
+        }
+        return Direction.NORTH; // fallback — ensureClearFront will carve out the space
+    }
+
+    //Make sure there is somewhere to stand
+    private static void ensureClearFront(ServerWorld world, BlockPos portalBottom, Direction facing) {
+        BlockPos front = portalBottom.offset(facing);
+
+        // Solid ground for the player to stand on
+        if (world.getBlockState(front.down()).isAir()) {
+            BlockState ground = (world.getRegistryKey() == World.OVERWORLD)
+                    ? Blocks.GRASS_BLOCK.getDefaultState()
+                    : ModBlocks.SODDEN_DIRT.getDefaultState();
+            world.setBlockState(front.down(), ground);
+        }
+
+        // Clear feet and head space
+        if (!world.getBlockState(front).isAir()) {
+            world.setBlockState(front, Blocks.AIR.getDefaultState());
+        }
+        if (!world.getBlockState(front.up()).isAir()) {
+            world.setBlockState(front.up(), Blocks.AIR.getDefaultState());
+        }
+    }
+
+    //Build a simple sodden oak tree if needed
+    private static void placeSoddenOakTree(ServerWorld world, BlockPos base) {
+        // Trunk: 5 logs (y+0 through y+4)
+        for (int y = 0; y <= 4; y++) {
+            world.setBlockState(base.up(y), ModBlocks.SODDEN_OAK_LOG.getDefaultState());
+        }
+
+        // Leaf canopy
+        int[][] layers = {
+                // { y-offset from base, horizontal radius }
+                {2, 1},
+                {3, 2},
+                {4, 2},
+                {5, 1},
+        };
+
+        for (int[] layer : layers) {
+            int yOff = layer[0];
+            int r = layer[1];
+            for (int x = -r; x <= r; x++) {
+                for (int z = -r; z <= r; z++) {
+                    if (Math.abs(x) == r && Math.abs(z) == r) continue; // round off corners
+                    BlockPos leafPos = base.add(x, yOff, z);
+                    if (world.getBlockState(leafPos).isAir()) {
+                        world.setBlockState(leafPos, ModBlocks.SODDEN_OAK_LEAVES.getDefaultState());
+                    }
+                }
+            }
+        }
+    }
+
 
     private static BlockPos findNearestPortal(ServerWorld world, BlockPos center, int radius) {
         BlockPos nearest = null;

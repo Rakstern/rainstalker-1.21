@@ -23,6 +23,7 @@ public class RainStalkerDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModEnglishLanguageProvider::new);
         pack.addProvider(ModRegistryDataGenerator::new);
         pack.addProvider(ModWorldGenerator::new);
+        pack.addProvider(ModEntityLootTableProvider::new);
     }
 
     @Override
