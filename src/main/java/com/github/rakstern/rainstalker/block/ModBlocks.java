@@ -3,6 +3,7 @@ package com.github.rakstern.rainstalker.block;
 import com.github.rakstern.rainstalker.RainStalker;
 import com.github.rakstern.rainstalker.block.custom.MagicBlock;
 import com.github.rakstern.rainstalker.block.custom.SoddenGrassBlock;
+import com.github.rakstern.rainstalker.block.custom.SoddenPortalBlock;
 import com.github.rakstern.rainstalker.item.ModItems;
 import com.github.rakstern.rainstalker.list.BlockSetTypeList;
 import com.github.rakstern.rainstalker.list.WoodTypeList;
@@ -310,6 +311,18 @@ public class ModBlocks {
             new ShortPlantBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS)),
             "sodden_short_grass",
             true
+    );
+
+    public static final SoddenPortalBlock SODDEN_PORTAL_BOTTOM = register(
+            new SoddenPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL)),
+            "sodden_portal_bottom",
+            false
+    );
+
+    public static final SoddenPortalBlock SODDEN_PORTAL_TOP = register(
+            new SoddenPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL)),
+            "sodden_portal_top",
+            false
     );
 
     public static <T extends Block> T register(T block, String name, boolean shouldRegisterItem) {

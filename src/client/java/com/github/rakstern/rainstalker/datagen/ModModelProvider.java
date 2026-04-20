@@ -7,9 +7,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.block.Block;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 
 import java.util.Optional;
 
@@ -83,6 +86,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.KINGCUP, ModBlocks.POTTED_KINGCUP, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         blockStateModelGenerator.registerTintableCross(ModBlocks.SODDEN_SHORT_GRASS, BlockStateModelGenerator.TintType.TINTED);
+        registerPortalBlock(blockStateModelGenerator, ModBlocks.SODDEN_PORTAL_BOTTOM, Identifier.of("rainstalker", "block/sodden_portal_bottom"));
+        registerPortalBlock(blockStateModelGenerator, ModBlocks.SODDEN_PORTAL_TOP, Identifier.of("rainstalker", "block/sodden_portal_top"));
     }
 
     @Override
@@ -134,5 +139,29 @@ public class ModModelProvider extends FabricModelProvider {
         castRoot.add("textures", castTextures);
 
         itemModelGenerator.writer.accept(castModelId, () -> castRoot);
+    }
+
+    public void registerPortalBlock(BlockStateModelGenerator generator, Block block, Identifier portalFace){
+        TextureMap textures = new TextureMap()
+                .put(TextureKey.PARTICLE, TextureMap.getId(ModBlocks.SODDEN_OAK_LOG))
+                .put(TextureKey.DOWN, Identifier.of(RainStalker.MOD_ID, "block/sodden_oak_log_top"))
+                .put(TextureKey.UP, Identifier.of(RainStalker.MOD_ID, "block/sodden_oak_log_top"))
+                .put(TextureKey.NORTH, portalFace) // This is the unique portal texture
+                .put(TextureKey.SOUTH, TextureMap.getId(ModBlocks.SODDEN_OAK_LOG))
+                .put(TextureKey.EAST, TextureMap.getId(ModBlocks.SODDEN_OAK_LOG))
+                .put(TextureKey.WEST, TextureMap.getId(ModBlocks.SODDEN_OAK_LOG));
+
+        //Upload the model (using CUBE as the base)
+        Identifier modelId = Models.CUBE.upload(block, textures, generator.modelCollector);
+
+        // Register the variants for rotation
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateVariantMap.create(HorizontalFacingBlock.FACING)
+                        .register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, modelId))
+                        .register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, modelId).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, modelId).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, modelId).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                )
+        );
     }
 }
