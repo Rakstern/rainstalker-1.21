@@ -4,10 +4,7 @@ import com.github.rakstern.rainstalker.ModBoats;
 import com.github.rakstern.rainstalker.RainStalker;
 import com.github.rakstern.rainstalker.block.ModBlocks;
 import com.github.rakstern.rainstalker.entity.ModEntities;
-import com.github.rakstern.rainstalker.item.custom.AdvancedFishingRodItem;
-import com.github.rakstern.rainstalker.item.custom.DownpourWarpItem;
-import com.github.rakstern.rainstalker.item.custom.RainStalkerCoreItem;
-import com.github.rakstern.rainstalker.item.custom.RotatorItem;
+import com.github.rakstern.rainstalker.item.custom.*;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -44,6 +41,8 @@ public class ModItems {
 
                     itemGroup.add(ModItems.RAINSTALKER_SPAWN_EGG);
                     itemGroup.add(ModItems.RAINSTALKER_CORE);
+
+                    itemGroup.add(ModItems.KINGCUP_SOUP);
                 });
     }
 
@@ -85,6 +84,16 @@ public class ModItems {
     public static final Item RAINSTALKER_CORE = register(new RainStalkerCoreItem(new Item.Settings()
             .maxCount(1).rarity(Rarity.RARE)),
             "rainstalker_core"); //TO-DO: Redo the texture
+
+    public static final Item KINGCUP_SOUP = register(new KingcupSoupItem(new Item.Settings()
+            .maxCount(1)
+            .food(new FoodComponent.Builder()
+                    .nutrition(6)
+                    .saturationModifier(0.6f)
+                    .alwaysEdible()
+                    .build())
+            ),
+            "kingcup_soup");
 
     public static <T extends Item> T register(T item, String id) {
         // Create the identifier for the item.

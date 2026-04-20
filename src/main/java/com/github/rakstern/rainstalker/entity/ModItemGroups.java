@@ -53,6 +53,10 @@ public class ModItemGroups {
             entries.add(ModItems.SODDEN_OAK_CHEST_BOAT);
         });
 
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries ->{
+            entries.add(ModItems.KINGCUP_SOUP);
+        });
+
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries ->{
             entries.add(ModItems.CONDENSED_DROPLET);
             entries.add(ModItems.CONDENSED_HAIL);

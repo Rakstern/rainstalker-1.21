@@ -99,6 +99,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAINSTALKER_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
         itemModelGenerator.register(ModItems.RAINSTALKER_CORE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.KINGCUP_SOUP, Models.GENERATED);
     }
 
     private void generateFishingRodModels(ItemModelGenerator itemModelGenerator){

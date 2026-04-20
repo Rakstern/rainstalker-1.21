@@ -157,6 +157,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
          */
 
         offerShapelessRecipe(recipeExporter, Items.YELLOW_DYE, ModBlocks.KINGCUP, "yellow_dye", 1);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.KINGCUP_SOUP)
+                .input(Items.BOWL)
+                .input(ModItems.CONDENSED_DROPLET)
+                .input(ModBlocks.KINGCUP.asItem())
+                .criterion(hasItem(ModItems.CONDENSED_DROPLET), conditionsFromItem(ModItems.CONDENSED_DROPLET))
+                .offerTo(recipeExporter);
     }
 
     private static @NotNull String hasTag(@NotNull TagKey<Item> tag){

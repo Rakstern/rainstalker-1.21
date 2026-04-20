@@ -31,7 +31,7 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
 
         translationBuilder.add("itemGroup.rainstalker", "RainStalker");
-        translationBuilder.add("rainstalker_drop_items", "RainStalker Drop Items");
+        translationBuilder.add("rainstalker:rainstalker_drop_items", "RainStalker Drop Items");
 
         //Natural Blocks
         translationBuilder.add(ModBlocks.SODDEN_DIRT, "Sodden Dirt");
@@ -90,8 +90,13 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("effect.rainstalker.downpour_warp", "Downpour Warp");
 
         //Potions
-        translationBuilder.add("item.minecraft.potion.effect.downpour_warp_potion", "Downpour Warp Potion");
-        translationBuilder.add("item.minecraft.splash_potion.effect.downpour_warp_potion", "Downpour Warp Splash Potion");
-        translationBuilder.add("item.minecraft.lingering_potion.effect.downpour_warp_potion", "Downpour Warp Lingering Potion");
+        translationBuilder.add("item.minecraft.potion.effect.downpour_warp_potion", "Potion of Downpour Warping");
+        translationBuilder.add("item.minecraft.splash_potion.effect.downpour_warp_potion", "Splash Potion of Downpour Warping");
+        translationBuilder.add("item.minecraft.lingering_potion.effect.downpour_warp_potion", "Lingering Potion of Downpour Warping");
+        translationBuilder.add("item.minecraft.tipped_arrow.effect.downpour_warp_potion", "Arrow of Downpour Warping");
+
+        //Food
+        translationBuilder.add(ModItems.KINGCUP_SOUP, "Kingcup Soup");
+        translationBuilder.add("item.rainstalker.kingcup_soup.tooltip_danger", "A desperate remedy. Not for the faint of heart... or stomach.");
     }
 }
