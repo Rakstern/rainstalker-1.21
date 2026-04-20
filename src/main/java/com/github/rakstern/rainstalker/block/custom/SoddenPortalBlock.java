@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public class SoddenPortalBlock extends HorizontalFacingBlock {
     public SoddenPortalBlock(Settings settings) {
-        super(settings.dropsNothing().strength(-3.0f, 2.0f).nonOpaque().noCollision());
+        super(settings.dropsNothing().strength(3.0f, 2.0f).nonOpaque().noCollision());
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
     }
 
