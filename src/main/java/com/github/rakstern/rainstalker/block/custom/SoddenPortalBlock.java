@@ -28,9 +28,10 @@ public class SoddenPortalBlock extends HorizontalFacingBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient && entity instanceof ServerPlayerEntity player) {
-            // Check if the player is actually "inside" the block
-            DownpourTeleporter.teleport(player,
-                    world.getRegistryKey() == ModDimensions.DOWNPOUR_WORLD_KEY ? World.OVERWORLD : ModDimensions.DOWNPOUR_WORLD_KEY);
+            DownpourTeleporter.teleportPortal(player,
+                    world.getRegistryKey() == ModDimensions.DOWNPOUR_WORLD_KEY
+                            ? World.OVERWORLD
+                            : ModDimensions.DOWNPOUR_WORLD_KEY);
         }
     }
 
