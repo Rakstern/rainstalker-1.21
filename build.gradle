@@ -23,6 +23,13 @@ repositories {
             includeGroup("software.bernie.geckolib")
         }
     }
+
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 
@@ -64,6 +71,9 @@ dependencies {
 
     modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
     include "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+
+    modImplementation "curse.maven:fabric-disable-custom-worlds-advice-401978:5510699"
+    include "curse.maven:fabric-disable-custom-worlds-advice-401978:5510699"
 }
 
 processResources {
