@@ -5,6 +5,7 @@ import com.github.rakstern.rainstalker.component.ModDataComponentTypes;
 import com.github.rakstern.rainstalker.effect.ModEffects;
 import com.github.rakstern.rainstalker.entity.ModEntities;
 import com.github.rakstern.rainstalker.entity.ModItemGroups;
+import com.github.rakstern.rainstalker.entity.custom.RainStalkerSpawnManager;
 import com.github.rakstern.rainstalker.item.ModItems;
 import com.github.rakstern.rainstalker.potion.ModPotions;
 import com.github.rakstern.rainstalker.sound.ModSounds;
@@ -48,6 +49,7 @@ public class RainStalker implements ModInitializer {
         ModItemGroups.registerItemGroups();
         ModEffects.registerEffects();
         ModPotions.registerPotions();
+        RainStalkerSpawnManager.init();
         //ModMaterialRules.makeRules(); //TO-DO: Address later, world generation required noise settings directly edited
 
         FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {

@@ -29,6 +29,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -329,9 +330,14 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
     }
 
     public static boolean canSpawn(EntityType<RainStalkerEntity> rainStalkerEntityEntityType, ServerWorldAccess serverWorldAccess, SpawnReason spawnReason, BlockPos blockPos, Random random) {
+        World world = serverWorldAccess.toServerWorld();
         // Spawn only in the rain
-        if (!serverWorldAccess.toServerWorld().isRaining()) {
+        if (!world.isRaining() || !world.getBiome(blockPos).value().hasPrecipitation()) {
             return false; //TO-DO: This seems to show a warning, better correct it
+        }
+
+        if(!RainStalkerSpawnManager.isCooldownOver(world)){
+            return false;
         }
 
         // Check for other RainStalkers in a huge radius (128 blocks)
@@ -340,6 +346,12 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
         List<RainStalkerEntity> others = serverWorldAccess.getEntitiesByClass(RainStalkerEntity.class, checkRadius, entity -> true);
 
         return others.isEmpty(); // Only spawn if no others are found
+    }
+
+    @Override
+    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        // Bypass HostileEntity's light-level check entirely
+        return true;
     }
 
 
