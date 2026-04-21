@@ -245,7 +245,7 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(FISHED, false); // Default to not fished
-        builder.add(RS_OBSERVED, false); // TO-DO: Rename to specifically RSOBserved to avoid possible conflict of naming?
+        builder.add(RS_OBSERVED, false);
         builder.add(OPACITY, 1.0f); //Default value is to be as visible as the texture allows
     }
 

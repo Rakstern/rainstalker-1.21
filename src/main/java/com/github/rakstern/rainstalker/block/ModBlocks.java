@@ -189,7 +189,7 @@ public class ModBlocks {
             ),
             "sodden_oak_fence_gate",
             true
-    ); //TO-DO: Change WoodType.Oak
+    );
 
     public static final Block SODDEN_OAK_STAIRS = register(
             new StairsBlock(

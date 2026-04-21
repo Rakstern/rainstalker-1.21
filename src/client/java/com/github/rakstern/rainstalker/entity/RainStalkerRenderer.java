@@ -15,7 +15,6 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 public class RainStalkerRenderer extends GeoEntityRenderer<RainStalkerEntity> {
 
     public RainStalkerRenderer(EntityRendererFactory.Context renderManager) {
-        //super(renderManager, new DefaultedEntityGeoModel<>(Identifier.of(RainStalker.MOD_ID, "rainstalker"))); //TO-DO: Remove?
         super(renderManager, new RainStalkerModel());
 
         this.addRenderLayer(new AutoGlowingGeoLayer<>(this){

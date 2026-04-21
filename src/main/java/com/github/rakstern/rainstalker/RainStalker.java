@@ -50,7 +50,7 @@ public class RainStalker implements ModInitializer {
         ModEffects.registerEffects();
         ModPotions.registerPotions();
         RainStalkerSpawnManager.init();
-        //ModMaterialRules.makeRules(); //TO-DO: Address later, world generation required noise settings directly edited
+        //ModMaterialRules.makeRules(); //TO-DO: Address later, world generation required noise settings directly edited, maybe we don't need this?
 
         FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
             builder.registerPotionRecipe(Potions.AWKWARD, ModItems.CONDENSED_DROPLET, ModPotions.DOWNPOUR_WARP_POTION);

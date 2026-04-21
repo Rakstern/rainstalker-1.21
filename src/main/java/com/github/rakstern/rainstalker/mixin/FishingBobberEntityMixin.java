@@ -54,7 +54,6 @@ public abstract class FishingBobberEntityMixin {
                 if (!bobber.getWorld().isClient) {
 
                     stalker.onFished();
-                    stalker.addCommandTag("fished_by_stalker"); //TO-DO: Maybe we don't need this anymore
 
                     ItemEntity itemEntity = getItemEntity(stalker, bobber, player);
                     bobber.getWorld().spawnEntity(itemEntity);
@@ -69,7 +68,7 @@ public abstract class FishingBobberEntityMixin {
 
     @Unique
     private static @NotNull ItemEntity getItemEntity(Entity entity, FishingBobberEntity bobber, PlayerEntity player) {
-        ItemStack loot = new ItemStack(ModItems.CONDENSED_DROPLET); // TO-DO: Condensed Droplet? Or maybe something else?
+        ItemStack loot = new ItemStack(ModItems.RAINSTALKER_CORE);
 
         // Spawn it slightly higher (entity.getY() + 0.5) so it doesn't get stuck in the floor
         ItemEntity itemEntity = new ItemEntity(bobber.getWorld(), entity.getX(), entity.getY() + 0.5, entity.getZ(), loot);

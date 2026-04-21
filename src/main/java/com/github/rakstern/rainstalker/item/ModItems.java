@@ -59,7 +59,6 @@ public class ModItems {
             .build();
 
     public static final Item CONDENSED_DROPLET = register(new Item(new Item.Settings()),"condensed_droplet");
-    //TO-DO: Temporarily turned the droplet into a warp item
     public static final Item CONDENSED_HAIL = register(new Item(new Item.Settings().food(FROZEN_FOOD_COMPONENT)){
         @Override
         public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

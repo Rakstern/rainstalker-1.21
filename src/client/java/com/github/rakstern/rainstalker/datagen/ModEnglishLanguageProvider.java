@@ -85,6 +85,10 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("painting.rainstalker.stalks_us.author", "Rakstern");
         translationBuilder.add("painting.rainstalker.scarecrow_relaxed.title", "Scarecrow Relaxed");
         translationBuilder.add("painting.rainstalker.scarecrow_relaxed.author", "Rakstern");
+        translationBuilder.add("painting.rainstalker.theft_in_the_rain.title", "Theft in the Rain");
+        translationBuilder.add("painting.rainstalker.theft_in_the_rain.author", "Rakstern");
+        translationBuilder.add("painting.rainstalker.to_their_home.title", "To Their Home");
+        translationBuilder.add("painting.rainstalker.to_their_home.author", "Rakstern");
 
         //Effects
         translationBuilder.add("effect.rainstalker.downpour_warp", "Downpour Warp");

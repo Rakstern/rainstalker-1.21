@@ -66,5 +66,7 @@ public class ModItemGroups {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries ->{
             entries.add(ModItems.RAINSTALKER_SPAWN_EGG);
         });
+
+        //TO-DO: Register paintings to appear in the rainstalker tab?
     }
 }
