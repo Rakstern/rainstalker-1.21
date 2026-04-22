@@ -1,6 +1,7 @@
 package com.github.rakstern.rainstalker.entity.custom;
 
 import com.github.rakstern.rainstalker.RainStalker;
+import com.github.rakstern.rainstalker.world.dimension.ModDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
@@ -14,6 +15,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -70,15 +73,15 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        // When fished, it's hostile time
+
+        // Melee attack: when fished OR when in their home dimension
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.5D, false) {
             @Override
             public boolean canStart() {
-                return isFished() && super.canStart();
+                return (isFished() || isInHomeDimension()) && super.canStart();
             }
         });
 
-        //Otherwise it's stalking time... but will it even attack when stalking? TO-DO: Make sure it attacks
         this.goalSelector.add(2, new StalkerSensingGoal(this));
         this.goalSelector.add(3, new FlankPlayerGoal(this));
 
@@ -86,7 +89,6 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(6, new LookAroundGoal(this));
 
-        // Targets: Attack players and Iron Golems
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
@@ -167,6 +169,14 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
                 this.setRSObserved(false);
                 // Optional: Teleport it slightly away to simulate it "vanishing"
             }
+
+            // Applied every second. I wonder if there is a better way to do this. TO-DO: Evaluate tick method.
+            if (this.age % 20 == 0) {
+                // Active while stalking (not fished), OR always in home dimension
+                if (!this.isFished() || isInHomeDimension()) {
+                    applyStalkerAura();
+                }
+            }
         }
 
         // Only run this part on the client (visuals)
@@ -202,6 +212,69 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
     // Helper method to check if the mob is walking
     private boolean isMoving() {
         return this.getVelocity().horizontalLengthSquared() > 1.0E-6D;
+    }
+
+    public boolean isInHomeDimension(){
+        return this.getWorld().getRegistryKey() == ModDimensions.DOWNPOUR_WORLD_KEY;
+    }
+
+    //Since the stalker doesn't directly attack when stalking, we need it to do something else
+    private void applyStalkerAura(){
+        boolean inHome = isInHomeDimension(); //Couldn't this be passed by a parameter?
+
+        //In overworld, use the aura when stalking unobserved
+        //In downpour, always apply the aura
+        if(!inHome && this.isRSObserved()) return;
+
+        double auraRange = inHome ? 16.0 : 10.0; //Potency of the aura depends on the dimension
+        double closeRange = inHome ? 8.0 : 5.0;
+
+        double auraRangeSq = auraRange * auraRange;
+        double closeRangeSq = closeRange * closeRange;
+
+        List<PlayerEntity> nearbyPlayers = this.getWorld().getEntitiesByClass(
+                PlayerEntity.class,
+                this.getBoundingBox().expand(auraRange),
+                player -> !player.isCreative() && !player.isSpectator() //No point trying to get those who are in creative or spectator mode
+        );
+
+        for (PlayerEntity player : nearbyPlayers) {
+            double distSq = this.squaredDistanceTo(player);
+
+            // DARKNESS — The screen periodically pulses dark. I think the Warden uses this, we might want a custom themed one. TO-DO: Custom Darkness
+            if (distSq < auraRangeSq) {
+                player.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.DARKNESS,
+                        inHome ? 100 : 60,   // 5 seconds at home, 3 seconds elsewhere
+                        0,
+                        true,   // ambient (subtle particles)
+                        false,  // no swirl particles
+                        inHome  // show the icon only in home dimension (elsewhere it's mysterious)
+                ));
+            }
+
+            // SLOWNESS — Slow the target when close
+            if (distSq < closeRangeSq) {
+                player.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.SLOWNESS,
+                        40,                    // 2 seconds
+                        inHome ? 1 : 0,        // Slowness II at home, I elsewhere
+                        true, false, true
+                ));
+            }
+
+            // WEAKNESS — Weaken the target when in the downpour
+            if (inHome && distSq < closeRangeSq) {
+                player.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.WEAKNESS,
+                        60,  // 3 seconds
+                        0,
+                        true, false, true
+                ));
+            }
+        }
+
+
     }
 
     @Override
@@ -351,7 +424,7 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
         // Bypass HostileEntity's light-level check entirely
-        return true;
+        return true; //TO-DO: Should we have overridden canSpawn in the first place anyway on the above method?
     }
 
 
