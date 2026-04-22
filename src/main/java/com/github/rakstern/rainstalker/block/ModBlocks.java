@@ -245,6 +245,7 @@ public class ModBlocks {
     private static final Identifier SODDEN_OAK_HANGING_SIGN_TEXTURE = RainStalker.id("entity/signs/hanging/sodden_oak");
     private static final Identifier SODDEN_OAK_HANGING_SIGN_GUI_TEXTURE = RainStalker.id("textures/gui/hanging_signs/sodden_oak");
 
+
     public static final TerraformSignBlock SODDEN_OAK_SIGN = register(
             new TerraformSignBlock(SODDEN_OAK_SIGN_TEXTURE,
                     AbstractBlock.Settings.create()
@@ -255,7 +256,7 @@ public class ModBlocks {
                             .burnable()
             ),
             "sodden_oak_sign",
-            true
+            false
     );
 
     public static final TerraformWallSignBlock SODDEN_OAK_WALL_SIGN = register(
@@ -281,7 +282,7 @@ public class ModBlocks {
                             .burnable()
             ),
             "sodden_oak_hanging_sign",
-            true
+            false
     );
 
     public static final TerraformWallHangingSignBlock SODDEN_OAK_WALL_HANGING_SIGN = register(
