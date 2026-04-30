@@ -65,5 +65,7 @@ public class RainStalkerClient implements ClientModInitializer {
 
         // Register the renderer to the entity type
         EntityRendererRegistry.register(ModEntities.RAINSTALKER, RainStalkerRenderer::new);
+
+
 	}
 }

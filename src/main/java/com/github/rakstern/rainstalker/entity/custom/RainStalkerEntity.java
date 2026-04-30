@@ -1,6 +1,7 @@
 package com.github.rakstern.rainstalker.entity.custom;
 
 import com.github.rakstern.rainstalker.RainStalker;
+import com.github.rakstern.rainstalker.effect.ModEffects;
 import com.github.rakstern.rainstalker.world.dimension.ModDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -224,6 +225,7 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
 
         //In overworld, use the aura when stalking unobserved
         //In downpour, always apply the aura
+        //TO-DO: Maybe don't bother undoing the aura when observed
         if(!inHome && this.isRSObserved()) return;
 
         double auraRange = inHome ? 16.0 : 10.0; //Potency of the aura depends on the dimension
@@ -241,12 +243,12 @@ public class RainStalkerEntity extends HostileEntity implements GeoEntity {
         for (PlayerEntity player : nearbyPlayers) {
             double distSq = this.squaredDistanceTo(player);
 
-            // DARKNESS — The screen periodically pulses dark. I think the Warden uses this, we might want a custom themed one. TO-DO: Custom Darkness
+            // Blindness
             if (distSq < auraRangeSq) {
                 player.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.DARKNESS,
+                        ModEffects.STALKER_DREAD,
                         inHome ? 100 : 60,   // 5 seconds at home, 3 seconds elsewhere
-                        0,
+                        inHome ? 1 : 0,
                         true,   // ambient (subtle particles)
                         false,  // no swirl particles
                         inHome  // show the icon only in home dimension (elsewhere it's mysterious)
